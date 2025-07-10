@@ -1,0 +1,182 @@
+import {StyleSheet} from 'react-native';
+import {Fonts} from '../../../interfaces/fonts.enum';
+
+export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingTop: 60,
+    paddingHorizontal: 20,
+    paddingBottom: 20,
+    backgroundColor: '#25D366',
+  },
+  backButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  headerTitle: {
+    fontSize: 20,
+    fontFamily: Fonts.Helvetica,
+    color: '#FFFFFF',
+    flex: 1,
+    textAlign: 'center',
+  },
+  placeholder: {
+    width: 40,
+  },
+  chatInfoSection: {
+    alignItems: 'center',
+    paddingVertical: 30,
+    paddingHorizontal: 20,
+    backgroundColor: '#F8F9FA',
+    borderBottomWidth: 1,
+    borderBottomColor: '#E5E7EB',
+  },
+  avatarContainer: {
+    position: 'relative',
+    marginBottom: 15,
+  },
+  chatAvatar: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    backgroundColor: '#E5E7EB',
+  },
+  defaultChatAvatar: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    backgroundColor: '#25D366',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  chatAvatarText: {
+    fontSize: 48,
+    fontFamily: Fonts.Helvetica,
+    color: '#FFFFFF',
+  },
+  cameraIcon: {
+    position: 'absolute',
+    bottom: 5,
+    right: 5,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: '#25D366',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 3,
+    borderColor: '#FFFFFF',
+  },
+  chatDetails: {
+    alignItems: 'center',
+  },
+  chatNameContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    marginBottom: 5,
+  },
+  chatName: {
+    fontSize: 24,
+    fontFamily: Fonts.Helvetica,
+    color: '#111827',
+    textAlign: 'center',
+  },
+  participantCount: {
+    fontSize: 16,
+    color: '#6B7280',
+  },
+  section: {
+    marginTop: 20,
+    paddingHorizontal: 20,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontFamily: Fonts.Helvetica,
+    color: '#111827',
+    marginBottom: 15,
+  },
+  settingItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 15,
+    paddingHorizontal: 15,
+    backgroundColor: '#F8F9FA',
+    borderRadius: 12,
+    gap: 15,
+  },
+  settingText: {
+    flex: 1,
+    fontSize: 16,
+    color: '#111827',
+  },
+  participantItem: {
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: '#F3F4F6',
+  },
+  participantInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 15,
+  },
+  participantAvatar: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: '#E5E7EB',
+  },
+  defaultParticipantAvatar: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: '#25D366',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  participantAvatarText: {
+    fontSize: 20,
+    fontFamily: Fonts.Helvetica,
+    color: '#FFFFFF',
+  },
+  participantDetails: {
+    flex: 1,
+  },
+  participantName: {
+    fontSize: 16,
+    fontFamily: Fonts.Helvetica,
+    color: '#111827',
+    marginBottom: 2,
+  },
+  participantPhone: {
+    fontSize: 14,
+    color: '#6B7280',
+  },
+  actionItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 15,
+    paddingHorizontal: 15,
+    backgroundColor: '#FEF2F2',
+    borderRadius: 12,
+    marginBottom: 10,
+    gap: 15,
+  },
+  actionText: {
+    fontSize: 16,
+    fontFamily: Fonts.Helvetica,
+  },
+  destructiveText: {
+    color: '#EF4444',
+  },
+});
