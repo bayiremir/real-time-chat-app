@@ -3,10 +3,11 @@ import {Fonts} from '../../../interfaces/fonts.enum';
 
 export const styles = StyleSheet.create({
   container: {
+    flex: 1,
     flexDirection: 'row',
     paddingVertical: 12,
     paddingHorizontal: 16,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#f0f0f0',
     borderBottomWidth: 0.5,
     borderBottomColor: '#e0e0e0',
   },

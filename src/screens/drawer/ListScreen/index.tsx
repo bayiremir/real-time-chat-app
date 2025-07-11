@@ -75,11 +75,13 @@ const ListScreen = () => {
                 onPress={() => handleListPress(list)}>
                 <View style={styles.listItemContainer}>
                   <Text style={styles.listItemText}>{list.name}</Text>
+                </View>
+                <View style={styles.rightContainer}>
                   <Text style={styles.listItemText}>
                     {list.members.length} kişi
                   </Text>
+                  <ChevronRightIcon size={20} color="black" />
                 </View>
-                <ChevronRightIcon size={20} color="black" />
               </TouchableOpacity>
               {index < lists.length - 1 && <View style={styles.divider} />}
             </React.Fragment>

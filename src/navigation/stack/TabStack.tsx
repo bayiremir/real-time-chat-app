@@ -27,7 +27,7 @@ const TabStack = () => {
         tabBarActiveTintColor: '#25D366',
         tabBarInactiveTintColor: '#8E8E93',
         tabBarStyle: {
-          backgroundColor: '#ffffff',
+          backgroundColor: '#f0f0f0',
           borderTopWidth: 0.5,
           borderTopColor: '#E5E5E5',
         },

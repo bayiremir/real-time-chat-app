@@ -18,6 +18,9 @@ export type RootStackParamList = {
   ListDetailScreen: {
     list: ListItem;
   };
+  BulkMessageScreen: undefined;
+  StarChatScreen: undefined;
+  ConnectedDevicesScreen: undefined;
 };
 
 export type TabStackParamList = {

@@ -1,13 +1,21 @@
-import {ActivityIndicator, FlatList, Text, View} from 'react-native';
 import React from 'react';
+import {ActivityIndicator, Text, View} from 'react-native';
 import {styles} from './styles';
 import TabBar from '../../../components/tab_components/TabBar';
 import SearchBar from '../../../components/tab_components/SearchBar';
-import {useListChatsQuery} from '../../../redux/services/mobileApi';
-import ChatSection from '../../../components/chat_components/ChatSection';
+import {ListsSection} from '../../../components/chat_components/ListSelection/ListsSection';
+import {ChatsList} from '../../../components/chat_components/ChatList/ChatsList';
+import {useChatScreen} from '../../../hooks/useChatScreen';
 
 const ChatScreen = () => {
-  const {data, isLoading} = useListChatsQuery({});
+  const {
+    isLoading,
+    listsWithAll,
+    filteredChats,
+    handleListSelect,
+    isListSelected,
+  } = useChatScreen();
+
   return (
     <View style={styles.container}>
       <TabBar />
@@ -17,13 +25,12 @@ const ChatScreen = () => {
         <View style={styles.content}>
           <Text style={styles.headerText}>Sohbetler</Text>
           <SearchBar />
-          <FlatList
-            data={data?.data}
-            renderItem={({item}) => <ChatSection chat={item} />}
-            keyExtractor={item => item._id}
-            showsVerticalScrollIndicator={false}
-            style={{backgroundColor: '#ffffff'}}
+          <ListsSection
+            lists={listsWithAll}
+            onListSelect={handleListSelect}
+            isListSelected={isListSelected}
           />
+          <ChatsList chats={filteredChats} />
         </View>
       )}
     </View>

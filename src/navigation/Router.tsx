@@ -15,6 +15,9 @@ import {RootState} from '../redux/store';
 import {RootStackParamList} from './types';
 import ListScreen from '../screens/drawer/ListScreen';
 import ListDetailScreen from '../screens/drawer/ListDetailScreen';
+import BulkMessageScreen from '../screens/drawer/BulkMessageScreen';
+import StarChatScreen from '../screens/drawer/StarChatScreen';
+import ConnectedDevicesScreen from '../screens/drawer/ConnectedDevicesScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -100,6 +103,30 @@ const Router = () => {
         <Stack.Screen
           name="ListDetailScreen"
           component={ListDetailScreen}
+          options={{
+            headerShown: false,
+            presentation: 'card',
+          }}
+        />
+        <Stack.Screen
+          name="BulkMessageScreen"
+          component={BulkMessageScreen}
+          options={{
+            headerShown: false,
+            presentation: 'card',
+          }}
+        />
+        <Stack.Screen
+          name="StarChatScreen"
+          component={StarChatScreen}
+          options={{
+            headerShown: false,
+            presentation: 'card',
+          }}
+        />
+        <Stack.Screen
+          name="ConnectedDevicesScreen"
+          component={ConnectedDevicesScreen}
           options={{
             headerShown: false,
             presentation: 'card',
