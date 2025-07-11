@@ -27,7 +27,6 @@ interface MessageInputProps {
 
 const MessageInput = ({chatId, onMessageSent}: MessageInputProps) => {
   const [message, setMessage] = useState('');
-  const [isFocused, setIsFocused] = useState(false);
   const textInputRef = useRef<TextInput>(null);
   const [sendMessage, {isLoading: isSendingMessage}] = useSendMessageMutation();
   const [sendFileMessage, {isLoading: isSendingFile}] =
@@ -148,7 +147,7 @@ const MessageInput = ({chatId, onMessageSent}: MessageInputProps) => {
   return (
     <TouchableWithoutFeedback onPress={dismissKeyboard}>
       <View style={styles.container}>
-        <View style={[styles.inputContainer, isFocused && styles.inputFocused]}>
+        <View style={styles.inputContainer}>
           <Pressable
             style={({pressed}) => [
               styles.attachButton,
@@ -171,8 +170,6 @@ const MessageInput = ({chatId, onMessageSent}: MessageInputProps) => {
               multiline
               maxLength={1000}
               editable={!isLoading}
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
               returnKeyType="send"
               onSubmitEditing={hasMessage ? handleSendMessage : undefined}
               blurOnSubmit={false}

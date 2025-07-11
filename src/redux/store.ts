@@ -1,11 +1,13 @@
 import {configureStore} from '@reduxjs/toolkit';
 import {mobileApi} from './services/mobileApi';
 import userSlice from './slices/userSlice';
+import listsSlice from './slices/listsSlice';
 
 export const store = configureStore({
   reducer: {
     [mobileApi.reducerPath]: mobileApi.reducer,
     userSlice: userSlice,
+    listsSlice: listsSlice,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

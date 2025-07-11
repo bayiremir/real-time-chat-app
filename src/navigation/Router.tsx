@@ -13,6 +13,8 @@ import ChatInfoScreen from '../screens/chat/ChatInfoScreen';
 import NotificationsScreen from '../screens/other/NotificationsScreen';
 import {RootState} from '../redux/store';
 import {RootStackParamList} from './types';
+import ListScreen from '../screens/drawer/ListScreen';
+import ListDetailScreen from '../screens/drawer/ListDetailScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -82,6 +84,22 @@ const Router = () => {
         <Stack.Screen
           name="Notifications"
           component={NotificationsScreen}
+          options={{
+            headerShown: false,
+            presentation: 'card',
+          }}
+        />
+        <Stack.Screen
+          name="ListScreen"
+          component={ListScreen}
+          options={{
+            headerShown: false,
+            presentation: 'card',
+          }}
+        />
+        <Stack.Screen
+          name="ListDetailScreen"
+          component={ListDetailScreen}
           options={{
             headerShown: false,
             presentation: 'card',

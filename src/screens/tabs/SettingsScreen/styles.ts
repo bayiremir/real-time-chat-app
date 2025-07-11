@@ -4,7 +4,7 @@ import {Fonts} from '../../../interfaces/fonts.enum';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#f0f0f0',
   },
   header: {
     paddingTop: 60,
@@ -12,37 +12,32 @@ export const styles = StyleSheet.create({
     paddingBottom: 20,
     backgroundColor: '#25D366',
   },
-  headerTitle: {
-    fontSize: 24,
-    fontFamily: Fonts.Helvetica,
-    color: '#FFFFFF',
-    textAlign: 'center',
+  headerText: {
+    fontFamily: Fonts.Bold,
+    fontSize: 32,
+    color: '#000',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
   },
   section: {
-    marginBottom: 20,
-  },
-  sectionTitle: {
-    fontSize: 14,
-    fontFamily: Fonts.Helvetica,
-    color: '#6B7280',
-    marginHorizontal: 20,
-    marginBottom: 10,
-    marginTop: 10,
-    textTransform: 'uppercase',
+    marginBottom: 30,
+    backgroundColor: '#FFFFFF',
+    marginHorizontal: 15,
+    borderRadius: 10,
   },
   profileSection: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 20,
+    paddingHorizontal: 15,
     paddingVertical: 20,
-    backgroundColor: '#F8F9FA',
-    marginBottom: 10,
+    backgroundColor: '#ffffff',
+    borderRadius: 10,
   },
   profileInfo: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 15,
+    gap: 10,
   },
   avatarContainer: {
     position: 'relative',
@@ -75,11 +70,6 @@ export const styles = StyleSheet.create({
     color: '#111827',
     marginBottom: 4,
   },
-  profilePhone: {
-    fontSize: 14,
-    color: '#6B7280',
-    marginBottom: 2,
-  },
   profileBio: {
     fontSize: 13,
     color: '#9CA3AF',
@@ -88,25 +78,26 @@ export const styles = StyleSheet.create({
   settingsItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 15,
-    backgroundColor: '#FFFFFF',
-    borderBottomWidth: 1,
-    borderBottomColor: '#F3F4F6',
+    paddingHorizontal: 15,
+    paddingVertical: 4,
   },
   itemLeft: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 15,
+    gap: 10,
   },
   iconContainer: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#F3F4F6',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  divider: {
+    height: 1,
+    marginHorizontal: 30,
+    backgroundColor: '#E5E7EB',
   },
   itemContent: {
     flex: 1,
@@ -125,21 +116,5 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
-  },
-  logoutButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginHorizontal: 20,
-    marginVertical: 20,
-    paddingVertical: 15,
-    backgroundColor: '#EF4444',
-    borderRadius: 12,
-    gap: 8,
-  },
-  logoutText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontFamily: Fonts.Helvetica,
   },
 });

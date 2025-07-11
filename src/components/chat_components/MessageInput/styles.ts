@@ -139,14 +139,7 @@ export const styles = StyleSheet.create({
     backgroundColor: '#8696a0',
     marginHorizontal: 1,
   },
-  // Additional enhanced styles
-  inputFocused: {
-    borderColor: '#25D366',
-    borderWidth: 1.5,
-    shadowColor: '#25D366',
-    shadowOpacity: 0.2,
-    elevation: 5,
-  },
+
   attachmentPreview: {
     flexDirection: 'row',
     paddingHorizontal: 12,

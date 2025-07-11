@@ -79,7 +79,7 @@ const ChatSection = ({chat}: ChatProps) => {
 
         <View style={styles.chatFooter}>
           <Text style={styles.lastMessage} numberOfLines={1}>
-            Son mesaj burada görünecek...
+            {chat.lastMessage?.content}
           </Text>
           {/* <View style={styles.unreadBadge}>
             <Text style={styles.unreadCount}>2</Text>

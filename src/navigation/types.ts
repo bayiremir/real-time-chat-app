@@ -1,4 +1,5 @@
 import {Chat} from '../interfaces/api.interface';
+import {ListItem} from '../interfaces/lists.interface';
 
 export type RootStackParamList = {
   TabStack: undefined;
@@ -13,6 +14,10 @@ export type RootStackParamList = {
     chat: Chat;
   };
   Notifications: undefined;
+  ListScreen: undefined;
+  ListDetailScreen: {
+    list: ListItem;
+  };
 };
 
 export type TabStackParamList = {

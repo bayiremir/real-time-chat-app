@@ -1,49 +1,38 @@
-import React, {useState, useCallback} from 'react';
+import React, {useCallback} from 'react';
 import {
   View,
   Text,
   ScrollView,
   TouchableOpacity,
-  Switch,
   Alert,
   Image,
-  ActivityIndicator,
 } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import {RootState} from '../../../redux/store';
-import {
-  useGetProfileQuery,
-  useGetNotificationSettingsQuery,
-  useUpdateNotificationSettingsMutation,
-  useLogoutMutation,
-} from '../../../redux/services/mobileApi';
-import {
-  logout,
-  setTheme,
-  setLanguage,
-  setNotificationEnabled,
-} from '../../../redux/slices/userSlice';
+import {useGetProfileQuery} from '../../../redux/services/mobileApi';
+import {setTheme, setLanguage} from '../../../redux/slices/userSlice';
 import {styles} from './styles';
-
-// Icons
 import {
   BellIcon,
+  ChevronRightIcon,
+  StarIcon,
+  ComputerDesktopIcon,
+  UserCircleIcon,
   ShieldCheckIcon,
+  ChatBubbleLeftIcon,
+  UserPlusIcon,
+  ListBulletIcon,
+  MegaphoneIcon,
+  ArrowsUpDownIcon,
   InformationCircleIcon,
-  ArrowRightIcon,
-  MoonIcon,
-  SunIcon,
-  LanguageIcon,
-  ArrowLeftOnRectangleIcon,
-  UsersIcon,
-  NoSymbolIcon,
 } from 'react-native-heroicons/outline';
+import TabBarWithout from '../../../components/tab_components/TabBarWithout';
+import SearchBar from '../../../components/tab_components/SearchBar';
 
 interface SettingsItemProps {
   icon: React.ReactNode;
   title: string;
-  subtitle?: string;
   onPress?: () => void;
   rightComponent?: React.ReactNode;
   showArrow?: boolean;
@@ -52,7 +41,6 @@ interface SettingsItemProps {
 const SettingsItem: React.FC<SettingsItemProps> = ({
   icon,
   title,
-  subtitle,
   onPress,
   rightComponent,
   showArrow = true,
@@ -67,12 +55,11 @@ const SettingsItem: React.FC<SettingsItemProps> = ({
         <View style={styles.iconContainer}>{icon}</View>
         <View style={styles.itemContent}>
           <Text style={styles.itemTitle}>{title}</Text>
-          {subtitle && <Text style={styles.itemSubtitle}>{subtitle}</Text>}
         </View>
       </View>
       <View style={styles.itemRight}>
         {rightComponent}
-        {showArrow && onPress && <ArrowRightIcon size={16} color="#9CA3AF" />}
+        {showArrow && onPress && <ChevronRightIcon size={16} color="#9CA3AF" />}
       </View>
     </TouchableOpacity>
   );
@@ -81,27 +68,14 @@ const SettingsItem: React.FC<SettingsItemProps> = ({
 const SettingsScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const {user, theme, language, notificationEnabled} = useSelector(
-    (state: RootState) => state.userSlice,
-  );
+  const {user, theme} = useSelector((state: RootState) => state.userSlice);
 
   const {data: profileData} = useGetProfileQuery();
-  const {data: notificationSettings} = useGetNotificationSettingsQuery();
-  const [updateNotificationSettings] = useUpdateNotificationSettingsMutation();
-  const [logoutMutation, {isLoading: isLoggingOut}] = useLogoutMutation();
-
-  const [localNotifications, setLocalNotifications] = useState(
-    notificationSettings?.data?.pushNotifications ?? notificationEnabled,
-  );
 
   const currentUser = profileData?.data || user;
 
   const handleProfilePress = useCallback(() => {
     navigation.navigate('ProfileScreen' as never);
-  }, [navigation]);
-
-  const handleContactsPress = useCallback(() => {
-    navigation.navigate('ContactsScreen' as never);
   }, [navigation]);
 
   const handleNotificationsPress = useCallback(() => {
@@ -127,22 +101,6 @@ const SettingsScreen = () => {
     ]);
   }, [dispatch]);
 
-  const handleNotificationToggle = useCallback(
-    async (value: boolean) => {
-      setLocalNotifications(value);
-      dispatch(setNotificationEnabled(value));
-
-      try {
-        await updateNotificationSettings({
-          pushNotifications: value,
-        });
-      } catch (error) {
-        console.error('Failed to update notification settings:', error);
-      }
-    },
-    [dispatch, updateNotificationSettings],
-  );
-
   const handleBlockedUsersPress = useCallback(() => {
     Alert.alert('Engellenen Kullanıcılar', 'Bu özellik yakında eklenecektir.');
   }, []);
@@ -151,44 +109,11 @@ const SettingsScreen = () => {
     Alert.alert('Gizlilik', 'Bu özellik yakında eklenecektir.');
   }, []);
 
-  const handleAboutPress = useCallback(() => {
-    Alert.alert(
-      'Hakkında',
-      'WhatsApp Clone\nVersion 1.0.0\n\nBu uygulama eğitim amaçlı geliştirilmiştir.',
-    );
-  }, []);
-
-  const handleLogout = useCallback(() => {
-    Alert.alert(
-      'Çıkış Yap',
-      'Hesabınızdan çıkmak istediğinizden emin misiniz?',
-      [
-        {text: 'İptal', style: 'cancel'},
-        {
-          text: 'Çıkış Yap',
-          style: 'destructive',
-          onPress: async () => {
-            try {
-              await logoutMutation().unwrap();
-              dispatch(logout());
-            } catch (error) {
-              // Even if server logout fails, clear local data
-              dispatch(logout());
-            }
-          },
-        },
-      ],
-    );
-  }, [logoutMutation, dispatch]);
-
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      {/* Header */}
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>Ayarlar</Text>
-      </View>
-
-      {/* Profile Section */}
+      <TabBarWithout />
+      <Text style={styles.headerText}>Ayarlar</Text>
+      <SearchBar />
       <View style={styles.section}>
         <TouchableOpacity
           style={styles.profileSection}
@@ -213,7 +138,6 @@ const SettingsScreen = () => {
               <Text style={styles.profileName}>
                 {currentUser?.firstName} {currentUser?.lastName}
               </Text>
-              <Text style={styles.profilePhone}>{currentUser?.phone}</Text>
               {currentUser?.bio && (
                 <Text style={styles.profileBio} numberOfLines={1}>
                   {currentUser.bio}
@@ -221,108 +145,83 @@ const SettingsScreen = () => {
               )}
             </View>
           </View>
-          <ArrowRightIcon size={20} color="#9CA3AF" />
+          <ChevronRightIcon size={20} color="#9CA3AF" />
         </TouchableOpacity>
       </View>
 
       {/* Account Settings */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Hesap</Text>
         <SettingsItem
-          icon={<UsersIcon size={24} color="#25D366" />}
-          title="Kişilerim"
-          subtitle="Kişi listesini yönet"
-          onPress={handleContactsPress}
+          icon={<ListBulletIcon size={24} color="black" />}
+          title="Listeler"
+          onPress={() => navigation.navigate('ListScreen' as never)}
         />
+        <View style={styles.divider} />
         <SettingsItem
-          icon={<NoSymbolIcon size={24} color="#EF4444" />}
-          title="Engellenen Kullanıcılar"
-          subtitle="Engellediğiniz kişileri görün"
+          icon={<MegaphoneIcon size={24} color="black" />}
+          title="Toplu Mesaj"
           onPress={handleBlockedUsersPress}
         />
+        <View style={styles.divider} />
         <SettingsItem
-          icon={<ShieldCheckIcon size={24} color="#3B82F6" />}
-          title="Gizlilik"
-          subtitle="Son görülme, profil fotoğrafı, durum"
+          icon={<StarIcon size={24} color="black" />}
+          title="Yıldızlı"
+          onPress={handlePrivacyPress}
+        />
+        <View style={styles.divider} />
+        <SettingsItem
+          icon={<ComputerDesktopIcon size={24} color="black" />}
+          title="Bağlı Cihazlar"
           onPress={handlePrivacyPress}
         />
       </View>
 
       {/* Notifications */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Bildirimler</Text>
         <SettingsItem
-          icon={<BellIcon size={24} color="#F59E0B" />}
-          title="Bildirimler"
-          subtitle={localNotifications ? 'Açık' : 'Kapalı'}
-          rightComponent={
-            <Switch
-              value={localNotifications}
-              onValueChange={handleNotificationToggle}
-              trackColor={{false: '#E5E7EB', true: '#86EFAC'}}
-              thumbColor={localNotifications ? '#25D366' : '#9CA3AF'}
-            />
-          }
-          showArrow={false}
+          icon={<UserCircleIcon size={24} color="black" />}
+          title="Hesap"
+          onPress={handleProfilePress}
         />
+        <View style={styles.divider} />
         <SettingsItem
-          icon={<BellIcon size={24} color="#8B5CF6" />}
-          title="Bildirim Geçmişi"
-          subtitle="Tüm bildirimleri görün"
+          icon={<ShieldCheckIcon size={24} color="black" />}
+          title="Gizlilik"
+          onPress={handleNotificationsPress}
+        />
+        <View style={styles.divider} />
+        <SettingsItem
+          icon={<ChatBubbleLeftIcon size={24} color="black" />}
+          title="Sohbetler"
+          onPress={handleNotificationsPress}
+        />
+        <View style={styles.divider} />
+        <SettingsItem
+          icon={<BellIcon size={24} color="black" />}
+          title="Bildirimler"
+          onPress={handleNotificationsPress}
+        />
+        <View style={styles.divider} />
+        <SettingsItem
+          icon={<ArrowsUpDownIcon size={24} color="black" />}
+          title="Depolama ve Veri"
           onPress={handleNotificationsPress}
         />
       </View>
 
       {/* App Settings */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Uygulama</Text>
         <SettingsItem
-          icon={
-            theme === 'light' ? (
-              <SunIcon size={24} color="#F59E0B" />
-            ) : (
-              <MoonIcon size={24} color="#6366F1" />
-            )
-          }
-          title="Tema"
-          subtitle={theme === 'light' ? 'Açık Tema' : 'Koyu Tema'}
+          icon={<InformationCircleIcon size={24} color="black" />}
+          title="Yardım"
           onPress={handleThemeToggle}
         />
+        <View style={styles.divider} />
         <SettingsItem
-          icon={<LanguageIcon size={24} color="#10B981" />}
-          title="Dil"
-          subtitle={language === 'tr' ? 'Türkçe' : 'English'}
+          icon={<UserPlusIcon size={24} color="black" />}
+          title="Arkadaşlarınızı davet edin"
           onPress={handleLanguageChange}
         />
-      </View>
-
-      {/* About */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Diğer</Text>
-        <SettingsItem
-          icon={<InformationCircleIcon size={24} color="#6B7280" />}
-          title="Hakkında"
-          subtitle="Uygulama bilgileri"
-          onPress={handleAboutPress}
-        />
-      </View>
-
-      {/* Logout */}
-      <View style={styles.section}>
-        <TouchableOpacity
-          style={styles.logoutButton}
-          onPress={handleLogout}
-          disabled={isLoggingOut}
-          activeOpacity={0.7}>
-          {isLoggingOut ? (
-            <ActivityIndicator size="small" color="#FFFFFF" />
-          ) : (
-            <>
-              <ArrowLeftOnRectangleIcon size={20} color="#FFFFFF" />
-              <Text style={styles.logoutText}>Çıkış Yap</Text>
-            </>
-          )}
-        </TouchableOpacity>
       </View>
     </ScrollView>
   );

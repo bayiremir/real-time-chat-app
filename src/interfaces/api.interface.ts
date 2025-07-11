@@ -247,6 +247,7 @@ export interface Chat {
   isActive: boolean;
   isArchived: boolean;
   lastActivity: string;
+  lastMessage?: Message;
   settings: ChatSettings;
   createdAt: string;
   updatedAt: string;

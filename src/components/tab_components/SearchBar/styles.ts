@@ -6,14 +6,15 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 16,
+    marginBottom: 20,
   },
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.05)',
     borderRadius: 8,
     padding: 10,
     gap: 10,
+    backgroundColor: 'rgba(0, 0, 0, 0.05)',
   },
   input: {
     flex: 1,

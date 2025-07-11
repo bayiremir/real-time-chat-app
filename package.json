@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@gorhom/bottom-sheet": "^5.1.6",
     "@react-native-picker/picker": "^2.11.1",
     "@react-navigation/bottom-tabs": "^7.4.2",
     "@react-navigation/native": "^7.1.14",
@@ -19,13 +20,17 @@
     "react": "18.3.1",
     "react-native": "0.76.0",
     "react-native-document-picker": "^9.3.0",
+    "react-native-draggable-flatlist": "^4.0.3",
     "react-native-gesture-handler": "^2.27.1",
     "react-native-heroicons": "^4.0.0",
     "react-native-image-picker": "^7.1.2",
+    "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-mmkv": "^3.3.0",
     "react-native-picker-select": "^9.3.1",
+    "react-native-reanimated": "^3.18.0",
     "react-native-safe-area-context": "^5.5.1",
     "react-native-screens": "^4.11.1",
+    "react-native-sortables": "^1.7.1",
     "react-native-svg": "^15.12.0",
     "react-redux": "^9.2.0",
     "redux": "^5.0.1"
