@@ -9,12 +9,13 @@ import {
 } from 'react-native';
 import BottomSheet, {BottomSheetView} from '@gorhom/bottom-sheet';
 import {useDispatch} from 'react-redux';
-import {createList} from '../../../redux/slices/listsSlice';
-import {User} from '../../../interfaces/api.interface';
+import {createList} from '../../../../redux/slices/listsSlice';
+import {User} from '../../../../interfaces/api.interface';
 import {XMarkIcon, PlusIcon, UserIcon} from 'react-native-heroicons/outline';
-import {useGetContactsQuery} from '../../../redux/services/mobileApi';
+import {useGetContactsQuery} from '../../../../redux/services/mobileApi';
 import {styles} from './styles';
 import ContactSelectionBottomSheet from './ContactSelectionBottomSheet';
+import {COLORS} from '../../../../constants/COLORS';
 
 interface CreateListBottomSheetProps {
   isVisible: boolean;
@@ -66,6 +67,7 @@ const CreateListBottomSheet: React.FC<CreateListBottomSheetProps> = ({
       createList({
         name: listName.trim(),
         members: selectedMembers,
+        type: 'normal',
       }),
     );
 
@@ -118,18 +120,43 @@ const CreateListBottomSheet: React.FC<CreateListBottomSheetProps> = ({
         index={-1}
         snapPoints={snapPoints}
         onChange={handleSheetChanges}
-        enablePanDownToClose>
+        enablePanDownToClose
+        backgroundStyle={{backgroundColor: COLORS.backgroundColor}}
+        handleIndicatorStyle={styles.handleIndicator}>
         <BottomSheetView style={styles.container}>
+          {/* Header */}
           <View style={styles.header}>
-            <Text style={styles.title}>Yeni Liste Oluştur</Text>
-            <TouchableOpacity onPress={handleClose} style={styles.closeButton}>
-              <XMarkIcon size={24} color="#666" />
+            <TouchableOpacity onPress={handleClose} style={styles.cancelButton}>
+              <Text style={styles.cancelText}>İptal</Text>
+            </TouchableOpacity>
+
+            <View style={styles.headerCenter}>
+              <Text style={styles.headerTitle}>Yeni liste</Text>
+            </View>
+
+            <TouchableOpacity
+              onPress={handleCreateList}
+              style={[
+                styles.createButton,
+                (!listName.trim() || selectedMembers.length === 0) &&
+                  styles.disabledCreateButton,
+              ]}
+              disabled={!listName.trim() || selectedMembers.length === 0}>
+              <Text
+                style={[
+                  styles.createText,
+                  (!listName.trim() || selectedMembers.length === 0) &&
+                    styles.disabledCreateText,
+                ]}>
+                Bitti
+              </Text>
             </TouchableOpacity>
           </View>
 
           <View style={styles.content}>
+            {/* Liste adı input */}
             <View style={styles.inputContainer}>
-              <Text style={styles.label}>Liste Adı</Text>
+              <Text style={styles.label}>Liste adı</Text>
               <TextInput
                 style={styles.input}
                 value={listName}
@@ -139,17 +166,17 @@ const CreateListBottomSheet: React.FC<CreateListBottomSheetProps> = ({
               />
             </View>
 
+            {/* Açıklama */}
             <View style={styles.descriptionContainer}>
               <Text style={styles.description}>
-                Oluşturduğuunuz her liste Sohbetler sekmenizin üst kısmında bir
-                filtre olarak görünecektir.
+                Oluşturduğunuz her liste Sohbetler sekmenizin üst kısmında bir
+                filtre olarak görünür.
               </Text>
             </View>
 
+            {/* Dahil edilenler */}
             <View style={styles.membersContainer}>
-              <Text style={styles.label}>
-                Dahil Edilenler ({selectedMembers.length})
-              </Text>
+              <Text style={styles.label}>Dahil edilenler</Text>
 
               <View style={styles.membersSection}>
                 <TouchableOpacity
@@ -189,17 +216,6 @@ const CreateListBottomSheet: React.FC<CreateListBottomSheetProps> = ({
                 ))}
               </View>
             </View>
-
-            <TouchableOpacity
-              style={[
-                styles.createButton,
-                (!listName.trim() || selectedMembers.length === 0) &&
-                  styles.disabledButton,
-              ]}
-              onPress={handleCreateList}
-              disabled={!listName.trim() || selectedMembers.length === 0}>
-              <Text style={styles.createButtonText}>Liste Oluştur</Text>
-            </TouchableOpacity>
           </View>
         </BottomSheetView>
       </BottomSheet>

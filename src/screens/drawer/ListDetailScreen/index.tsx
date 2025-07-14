@@ -11,7 +11,6 @@ import {useNavigation, useRoute, RouteProp} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useDispatch, useSelector} from 'react-redux';
 import GoBackTabBar from '../../../components/tab_components/GoBackTabBar';
-import AddMemberBottomSheet from '../../../components/chat_components/AddMemberBottomSheet';
 import {PlusIcon} from 'react-native-heroicons/outline';
 import {RootStackParamList} from '../../../navigation/types';
 import {RootState} from '../../../redux/store';
@@ -21,6 +20,7 @@ import {
 } from '../../../redux/slices/listsSlice';
 import {useGetContactsQuery} from '../../../redux/services/mobileApi';
 import {styles} from './styles';
+import AddMemberBottomSheet from '../../../components/settings_components/list/AddMemberBottomSheet';
 
 type ListDetailScreenRouteProp = RouteProp<
   RootStackParamList,

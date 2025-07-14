@@ -1,14 +1,15 @@
 import {StyleSheet} from 'react-native';
 import {Fonts} from '../../../interfaces/fonts.enum';
+import {COLORS} from '../../../constants/COLORS';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: COLORS.backgroundColor,
   },
   content: {
     paddingHorizontal: 15,
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.whiteColor,
   },
   listItem: {
     flexDirection: 'row',
@@ -24,16 +25,16 @@ export const styles = StyleSheet.create({
   divider: {
     borderBottomWidth: 1,
     marginHorizontal: 30,
-    borderBottomColor: '#f0f0f0',
+    borderBottomColor: COLORS.dirtyColor,
   },
   membersSection: {
-    backgroundColor: 'white',
+    backgroundColor: COLORS.whiteColor,
     marginHorizontal: 15,
     marginVertical: 5,
     borderRadius: 8,
     overflow: 'hidden',
     borderWidth: 1,
-    borderColor: '#f0f0f0',
+    borderColor: COLORS.dirtyColor,
     marginBottom: 30,
   },
   sectionTitle: {
@@ -54,7 +55,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
   },
   addFirstMemberButton: {
-    backgroundColor: '#25D366',
+    backgroundColor: COLORS.greenColor,
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 20,
@@ -70,12 +71,12 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
   },
   iconContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
+    backgroundColor: COLORS.dirtyColor,
     padding: 10,
     borderRadius: 50,
   },
   bottomSheetContainer: {
     flex: 1,
-    backgroundColor: 'red',
+    backgroundColor: COLORS.backgroundColor,
   },
 });

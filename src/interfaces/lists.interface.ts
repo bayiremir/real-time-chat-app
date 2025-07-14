@@ -1,5 +1,7 @@
 import {User} from './api.interface';
 
+export type ListType = 'normal' | 'bulk';
+
 export interface ListItem {
   id: string;
   name: string;
@@ -8,6 +10,7 @@ export interface ListItem {
   updatedAt: string;
   color?: string;
   description?: string;
+  type?: ListType;
 }
 
 export interface ListsState {
@@ -22,6 +25,7 @@ export interface CreateListRequest {
   members: User[];
   description?: string;
   color?: string;
+  type?: ListType;
 }
 
 export interface UpdateListRequest {
@@ -30,6 +34,7 @@ export interface UpdateListRequest {
   members?: User[];
   description?: string;
   color?: string;
+  type?: ListType;
 }
 
 export interface AddMemberToListRequest {

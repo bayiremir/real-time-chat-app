@@ -110,6 +110,7 @@ export const styles = StyleSheet.create({
   },
   itemSubtitle: {
     fontSize: 14,
+    fontFamily: Fonts.Helvetica,
     color: '#6B7280',
   },
   itemRight: {

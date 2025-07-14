@@ -46,6 +46,7 @@ const listsSlice = createSlice({
         members: action.payload.members,
         description: action.payload.description,
         color: action.payload.color,
+        type: action.payload.type || 'normal',
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       };

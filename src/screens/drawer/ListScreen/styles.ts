@@ -1,15 +1,16 @@
 import {StyleSheet} from 'react-native';
 import {Fonts} from '../../../interfaces/fonts.enum';
+import {COLORS} from '../../../constants/COLORS';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '##F2F2F7',
+    backgroundColor: COLORS.backgroundColor,
   },
   content: {
     paddingHorizontal: 15,
     marginHorizontal: 15,
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.whiteColor,
     borderRadius: 10,
   },
   title: {
@@ -29,7 +30,7 @@ export const styles = StyleSheet.create({
   divider: {
     borderBottomWidth: 1,
     marginHorizontal: 12,
-    borderBottomColor: '#f0f0f0',
+    borderBottomColor: COLORS.dirtyColor,
   },
   listItemText: {
     fontSize: 16,
@@ -46,10 +47,11 @@ export const styles = StyleSheet.create({
   },
   listItemIcon: {
     padding: 5,
-    backgroundColor: '#25D366',
+    backgroundColor: COLORS.greenColor,
     borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
+    marginRight: 10,
   },
   listItemContainer: {
     flexDirection: 'row',

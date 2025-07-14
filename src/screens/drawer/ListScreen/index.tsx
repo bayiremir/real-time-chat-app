@@ -4,8 +4,6 @@ import {useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import GoBackTabBar from '../../../components/tab_components/GoBackTabBar';
-import CreateListBottomSheet from '../../../components/chat_components/CreateListBottomSheet';
-import ReorderListBottomSheet from '../../../components/chat_components/ReorderListBottomSheet';
 import {styles} from './styles';
 import {ChevronRightIcon} from 'react-native-heroicons/outline';
 import {PlusIcon} from 'react-native-heroicons/solid';
@@ -13,6 +11,8 @@ import {RootState} from '../../../redux/store';
 
 import {RootStackParamList} from '../../../navigation/types';
 import {ListItem} from '../../../interfaces/lists.interface';
+import CreateListBottomSheet from '../../../components/settings_components/list/CreateListBottomSheet';
+import ReorderListBottomSheet from '../../../components/settings_components/list/ReorderListBottomSheet';
 
 type ListScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -24,7 +24,12 @@ const ListScreen = () => {
   const [bottomSheetVisible, setBottomSheetVisible] = useState(false);
   const [reorderBottomSheetVisible, setReorderBottomSheetVisible] =
     useState(false);
-  const lists = useSelector((state: RootState) => state.listsSlice.lists);
+  const allLists = useSelector((state: RootState) => state.listsSlice.lists);
+
+  // Sadece normal listeleri göster, bulk mesaj gruplarını hariç tut
+  const lists = allLists.filter(
+    (list: any) => !list.type || list.type === 'normal',
+  );
 
   const handleCreateNewList = () => {
     setBottomSheetVisible(true);
