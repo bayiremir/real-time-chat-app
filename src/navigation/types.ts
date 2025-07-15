@@ -1,5 +1,6 @@
 import {Chat} from '../interfaces/api.interface';
 import {ListItem} from '../interfaces/lists.interface';
+import {User} from '../interfaces/api.interface';
 
 export type RootStackParamList = {
   TabStack: undefined;
@@ -21,6 +22,25 @@ export type RootStackParamList = {
   BulkMessageScreen: undefined;
   StarChatScreen: undefined;
   ConnectedDevicesScreen: undefined;
+  // Modal screens converted from BottomSheets
+  ReorderListModal: {
+    lists: ListItem[];
+  };
+  CreateListModal: undefined;
+  ContactSelectionModal: {
+    contacts: User[];
+    selectedMembers: User[];
+    listId?: string; // For adding to existing list
+    isCreatingList?: boolean; // For creating new list
+  };
+  AddMemberModal: {
+    contacts: User[];
+    listId: string;
+    existingMembers: User[];
+  };
+  AddBulkModal: {
+    contacts: User[];
+  };
 };
 
 export type TabStackParamList = {

@@ -6,8 +6,6 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.backgroundColor,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   contentContainer: {
     flex: 1,
@@ -16,6 +14,9 @@ export const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   button: {
+    position: 'absolute',
+    bottom: 20,
+    alignSelf: 'center',
     padding: 10,
     borderRadius: 10,
     marginBottom: 20,
@@ -47,6 +48,9 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
   },
   groupItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     backgroundColor: COLORS.whiteColor,
     borderRadius: 10,
     padding: 15,
@@ -66,7 +70,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   groupName: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: Fonts.Helvetica,
     color: 'gray',
     flex: 1,
@@ -74,6 +78,49 @@ export const styles = StyleSheet.create({
   groupMembersCount: {
     fontSize: 14,
     fontFamily: Fonts.Helvetica,
-    color: COLORS.greenColor,
+    color: 'black',
+    marginBottom: 5,
+  },
+
+  editButtonText: {
+    fontSize: 14,
+    fontFamily: Fonts.Helvetica,
+    color: 'black',
+  },
+  headerActions: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 15,
+  },
+  deleteButton: {
+    padding: 5,
+  },
+  selectedGroupItem: {
+    backgroundColor: '#E3F2FD',
+    borderColor: '#2196F3',
+    borderWidth: 1,
+  },
+  selectionCircle: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: '#CCCCCC',
+    marginRight: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  selectedCircle: {
+    borderColor: '#2196F3',
+    backgroundColor: '#2196F3',
+  },
+  selectedIndicator: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: '#FFFFFF',
+  },
+  groupContent: {
+    flex: 1,
   },
 });

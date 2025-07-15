@@ -20,7 +20,6 @@ import {
 import {User} from '../../../interfaces/api.interface';
 import {styles} from './styles';
 
-// Icons
 import {
   MagnifyingGlassIcon,
   UserPlusIcon,
@@ -87,15 +86,15 @@ const ContactsScreen = () => {
   const [blockUser] = useBlockUserMutation();
   const [createChat] = useCreateChatMutation();
 
-  // Filter contacts based on search query
   const filteredContacts = useMemo(() => {
     const contacts = contactsData?.data || [];
     if (!searchQuery.trim()) return contacts;
 
     return contacts.filter(contact => {
-      const fullName = `${contact.firstName} ${contact.lastName}`.toLowerCase();
-      const phone = contact.phone.toLowerCase();
-      const query = searchQuery.toLowerCase();
+      const fullName =
+        `${contact?.firstName} ${contact?.lastName}`.toLowerCase();
+      const phone = contact?.phone?.toLowerCase() || '';
+      const query = searchQuery?.toLowerCase();
 
       return fullName.includes(query) || phone.includes(query);
     });
@@ -159,11 +158,7 @@ const ContactsScreen = () => {
         }).unwrap();
 
         if (result.success) {
-          // Navigate to chat detail with the created/existing chat
-          navigation.navigate(
-            'ChatDetail' as never,
-            {chat: result.data} as never,
-          );
+          navigation.navigate('ChatDetail', {chat: result.data});
         }
       } catch (error: any) {
         Alert.alert('Hata', 'Sohbet başlatılırken bir hata oluştu');

@@ -18,7 +18,6 @@ import {
 import {User} from '../../../interfaces/api.interface';
 import {styles} from './styles';
 
-// Icons
 import {
   MagnifyingGlassIcon,
   UserPlusIcon,
@@ -98,7 +97,6 @@ const UserSearchScreen = () => {
             {
               text: 'Tamam',
               onPress: () => {
-                // Go back to contacts screen
                 navigation.goBack();
               },
             },
@@ -130,11 +128,7 @@ const UserSearchScreen = () => {
         }).unwrap();
 
         if (result.success) {
-          // Navigate to chat detail with the created/existing chat
-          navigation.navigate(
-            'ChatDetail' as never,
-            {chat: result.data} as never,
-          );
+          navigation.navigate('ChatDetail', {chat: result.data});
         }
       } catch (error: any) {
         Alert.alert('Hata', 'Sohbet başlatılırken bir hata oluştu');

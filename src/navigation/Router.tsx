@@ -18,6 +18,12 @@ import ListDetailScreen from '../screens/drawer/ListDetailScreen';
 import BulkMessageScreen from '../screens/drawer/BulkMessageScreen';
 import StarChatScreen from '../screens/drawer/StarChatScreen';
 import ConnectedDevicesScreen from '../screens/drawer/ConnectedDevicesScreen';
+// Modal screens
+import ReorderListModal from '../screens/modals/ReorderListModal';
+import CreateListModal from '../screens/modals/CreateListModal';
+import ContactSelectionModal from '../screens/modals/ContactSelectionModal';
+import AddMemberModal from '../screens/modals/AddMemberModal';
+import AddBulkModal from '../screens/modals/AddBulkModal';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -130,6 +136,47 @@ const Router = () => {
           options={{
             headerShown: false,
             presentation: 'card',
+          }}
+        />
+        {/* Modal screens */}
+        <Stack.Screen
+          name="ReorderListModal"
+          component={ReorderListModal}
+          options={{
+            headerShown: false,
+            presentation: 'modal',
+          }}
+        />
+        <Stack.Screen
+          name="CreateListModal"
+          component={CreateListModal}
+          options={{
+            headerShown: false,
+            presentation: 'modal',
+          }}
+        />
+        <Stack.Screen
+          name="ContactSelectionModal"
+          component={ContactSelectionModal}
+          options={{
+            headerShown: false,
+            presentation: 'modal',
+          }}
+        />
+        <Stack.Screen
+          name="AddMemberModal"
+          component={AddMemberModal}
+          options={{
+            headerShown: false,
+            presentation: 'modal',
+          }}
+        />
+        <Stack.Screen
+          name="AddBulkModal"
+          component={AddBulkModal}
+          options={{
+            headerShown: false,
+            presentation: 'modal',
           }}
         />
       </Stack.Navigator>

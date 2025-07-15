@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -20,7 +20,6 @@ import {
 } from '../../../redux/slices/listsSlice';
 import {useGetContactsQuery} from '../../../redux/services/mobileApi';
 import {styles} from './styles';
-import AddMemberBottomSheet from '../../../components/settings_components/list/AddMemberBottomSheet';
 
 type ListDetailScreenRouteProp = RouteProp<
   RootStackParamList,
@@ -35,7 +34,6 @@ const ListDetailScreen = () => {
   const navigation = useNavigation<ListDetailScreenNavigationProp>();
   const route = useRoute<ListDetailScreenRouteProp>();
   const dispatch = useDispatch();
-  const [addMemberSheetVisible, setAddMemberSheetVisible] = useState(false);
 
   const {list} = route.params;
 
@@ -45,13 +43,17 @@ const ListDetailScreen = () => {
   );
 
   // API'dan kontakları çek
-  const {data: contactsData, isLoading: contactsLoading} = useGetContactsQuery({
+  const {data: contactsData} = useGetContactsQuery({
     page: 1,
     limit: 100,
   });
 
   const handleAddMember = () => {
-    setAddMemberSheetVisible(true);
+    navigation.navigate('AddMemberModal', {
+      contacts: contactsData?.data || [],
+      listId: displayList.id,
+      existingMembers: displayList.members,
+    });
   };
 
   const handleRemoveMember = (memberId: string, memberName: string) => {
@@ -156,15 +158,6 @@ const ListDetailScreen = () => {
           </View>
         </View>
       </ScrollView>
-
-      <AddMemberBottomSheet
-        isVisible={addMemberSheetVisible}
-        onClose={() => setAddMemberSheetVisible(false)}
-        contacts={contactsData?.data || []}
-        isLoading={contactsLoading}
-        listId={displayList.id}
-        existingMembers={displayList.members}
-      />
     </>
   );
 };

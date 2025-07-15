@@ -1,13 +1,11 @@
 import {StyleSheet} from 'react-native';
-import {Fonts} from '../../../../interfaces/fonts.enum';
-import {COLORS} from '../../../../constants/COLORS';
+import {Fonts} from '../../../interfaces/fonts.enum';
+import {COLORS} from '../../../constants/COLORS';
 
 export const styles = StyleSheet.create({
-  handleIndicator: {
-    backgroundColor: COLORS.backgroundColor,
-  },
   container: {
     flex: 1,
+    backgroundColor: COLORS.backgroundColor,
   },
   header: {
     flexDirection: 'row',
@@ -16,6 +14,8 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 16,
     backgroundColor: COLORS.backgroundColor,
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#E5E5E5',
   },
   cancelButton: {
     paddingVertical: 8,
@@ -27,6 +27,7 @@ export const styles = StyleSheet.create({
     color: 'black',
   },
   headerCenter: {
+    flex: 1,
     alignItems: 'center',
   },
   headerTitle: {
@@ -51,7 +52,7 @@ export const styles = StyleSheet.create({
   createText: {
     fontSize: 17,
     fontFamily: Fonts.Helvetica,
-    color: '#007AFF',
+    color: '#25D366',
     fontWeight: '600',
   },
   disabledCreateText: {
@@ -82,6 +83,7 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.whiteColor,
     borderRadius: 10,
     marginHorizontal: 20,
+    marginBottom: 20,
   },
   infoText: {
     fontSize: 13,
@@ -90,13 +92,12 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 18,
   },
-  contactsContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    marginHorizontal: 20,
-  },
   contactsList: {
     flex: 1,
+    paddingHorizontal: 20,
+  },
+  sectionContainer: {
+    marginBottom: 20,
   },
   sectionHeader: {
     fontSize: 16,
@@ -104,6 +105,7 @@ export const styles = StyleSheet.create({
     color: '#8E8E93',
     paddingHorizontal: 16,
     paddingVertical: 8,
+    backgroundColor: COLORS.backgroundColor,
   },
   contactItem: {
     flexDirection: 'row',
@@ -112,8 +114,11 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 12,
     backgroundColor: COLORS.whiteColor,
-    borderBottomColor: COLORS.dirtyColor,
     borderRadius: 10,
+    marginBottom: 2,
+  },
+  selectedContactItem: {
+    backgroundColor: '#E8F5E8',
   },
   contactLeft: {
     flexDirection: 'row',
@@ -136,12 +141,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  avatarText: {
-    fontSize: 16,
-    fontFamily: Fonts.Helvetica,
-    color: '#8E8E93',
-    fontWeight: '600',
-  },
   contactInfo: {
     flex: 1,
   },
@@ -149,73 +148,24 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: Fonts.Helvetica,
     color: '#000',
-    fontWeight: '400',
   },
-  contactBio: {
-    fontSize: 13,
+  contactPhone: {
+    fontSize: 14,
     fontFamily: Fonts.Helvetica,
     color: '#8E8E93',
     marginTop: 2,
   },
-  checkbox: {
-    width: 24,
-    height: 24,
-    borderRadius: 12,
-    borderWidth: 2,
-    borderColor: '#E5E5E5',
-    backgroundColor: COLORS.whiteColor,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  checkedCheckbox: {
-    backgroundColor: '#007AFF',
-    borderColor: '#007AFF',
-  },
   checkmark: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: COLORS.whiteColor,
-  },
-  alphabetIndex: {
-    width: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 10,
-  },
-  alphabetItem: {
-    paddingVertical: 2,
-    paddingHorizontal: 4,
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    backgroundColor: '#25D366',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  alphabetText: {
+  checkmarkText: {
+    color: 'white',
     fontSize: 12,
-    fontFamily: Fonts.Helvetica,
-    color: '#007AFF',
-    fontWeight: '600',
-  },
-  loadingContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 40,
-  },
-  loadingText: {
-    fontSize: 16,
-    fontFamily: Fonts.Helvetica,
-    color: '#8E8E93',
-  },
-  emptyContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 40,
-  },
-  emptyText: {
-    fontSize: 16,
-    fontFamily: Fonts.Helvetica,
-    color: '#8E8E93',
-    textAlign: 'center',
+    fontWeight: 'bold',
   },
 });

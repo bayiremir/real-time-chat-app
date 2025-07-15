@@ -12,6 +12,7 @@ import {useNavigation} from '@react-navigation/native';
 import {LoginScreenNavigationProp} from '../../../interfaces/navigation.interface';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {usePhoneLoginMutation} from '../../../redux/services/mobileApi';
+import {ChatBubbleLeftIcon} from 'react-native-heroicons/outline';
 
 const LoginScreen = () => {
   const navigation = useNavigation<LoginScreenNavigationProp>();
@@ -99,7 +100,7 @@ const LoginScreen = () => {
       {/* Header */}
       <View style={styles.headerContainer}>
         <View style={styles.logo}>
-          <Text style={styles.logoText}>💬</Text>
+          <ChatBubbleLeftIcon size={24} color="white" />
         </View>
         <Text style={styles.welcomeText}>Hoş Geldiniz</Text>
         <Text style={styles.subtitleText}>

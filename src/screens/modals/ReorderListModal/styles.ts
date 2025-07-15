@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {Fonts} from '../../../../interfaces/fonts.enum';
+import {Fonts} from '../../../interfaces/fonts.enum';
 
 export const styles = StyleSheet.create({
   container: {
@@ -48,23 +48,27 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: 12,
-    padding: 12,
-    minHeight: 60,
+    backgroundColor: '#f8f9fa',
+    padding: 15,
+    flex: 1,
+    marginHorizontal: 5,
   },
   deleteButton: {
+    backgroundColor: '#ff4444',
+    borderRadius: 15,
     width: 30,
     height: 30,
-    borderRadius: 20,
-    backgroundColor: '#ff4444',
-    alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 10,
+    alignItems: 'center',
+    marginRight: 15,
   },
-  listInfo: {},
+  listInfo: {
+    flex: 1,
+  },
   listName: {
     fontSize: 16,
     fontFamily: Fonts.Helvetica,
-    color: '#333',
+    color: 'black',
     marginBottom: 2,
   },
   memberCount: {
@@ -73,17 +77,15 @@ export const styles = StyleSheet.create({
     color: 'gray',
   },
   dragHandle: {
-    alignItems: 'center',
-    marginLeft: 10,
-    width: 40,
-    height: 40,
-    justifyContent: 'center',
+    marginLeft: 15,
+    padding: 5,
   },
   saveButton: {
     backgroundColor: '#25D366',
-    paddingVertical: 15,
-    borderRadius: 8,
+    borderRadius: 10,
+    paddingVertical: 12,
     alignItems: 'center',
+    marginTop: 20,
   },
   saveButtonText: {
     color: 'white',
@@ -92,14 +94,12 @@ export const styles = StyleSheet.create({
   },
   emptyContainer: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 40,
+    alignItems: 'center',
   },
   emptyText: {
     fontSize: 16,
     fontFamily: Fonts.Helvetica,
     color: 'gray',
-    textAlign: 'center',
   },
 });
