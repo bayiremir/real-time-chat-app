@@ -41,10 +41,6 @@ const SettingsScreen = () => {
     navigation.navigate('Notifications' as never);
   }, [navigation]);
 
-  const handlePrivacyPress = useCallback(() => {
-    Alert.alert('Gizlilik', 'Bu özellik yakında eklenecektir.');
-  }, []);
-
   const handleGenericAlert = useCallback((title: string) => {
     Alert.alert(title, 'Bu özellik yakında eklenecektir.');
   }, []);
@@ -69,7 +65,9 @@ const SettingsScreen = () => {
 
     navigateToProfile: handleProfilePress,
 
-    handlePrivacy: handlePrivacyPress,
+    handleSecurity: useCallback(() => {
+      navigation.navigate('SecurityScreen' as never);
+    }, [navigation]),
 
     handleChats: useCallback(() => {
       handleGenericAlert('Sohbetler');

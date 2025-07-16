@@ -2,12 +2,14 @@ import {configureStore} from '@reduxjs/toolkit';
 import {mobileApi} from './services/mobileApi';
 import userSlice from './slices/userSlice';
 import listsSlice from './slices/listsSlice';
+import starredMessagesSlice from './slices/starredMessagesSlice';
 
 export const store = configureStore({
   reducer: {
     [mobileApi.reducerPath]: mobileApi.reducer,
     userSlice: userSlice,
     listsSlice: listsSlice,
+    starredMessages: starredMessagesSlice,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

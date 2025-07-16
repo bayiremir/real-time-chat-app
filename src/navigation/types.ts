@@ -1,4 +1,4 @@
-import {Chat} from '../interfaces/api.interface';
+import {Chat, Message} from '../interfaces/api.interface';
 import {ListItem} from '../interfaces/lists.interface';
 import {User} from '../interfaces/api.interface';
 
@@ -41,6 +41,12 @@ export type RootStackParamList = {
   AddBulkModal: {
     contacts: User[];
   };
+  ForwardMessageModal: {
+    message: Message;
+    contacts: User[];
+  };
+  SecurityScreen: undefined;
+  ProfileListPickerScreen: undefined;
 };
 
 export type TabStackParamList = {

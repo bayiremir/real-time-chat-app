@@ -15,6 +15,13 @@ const initialState: userSliceInitialStateType = {
   onboarding: storage.getString('onboarding') === 'true' || false,
   notificationEnabled:
     storage.getString('notificationEnabled') === 'true' || false,
+  lastSeenSetting: storage.getString('lastSeenSetting') || 'Hiç kimse',
+  profilePhotoSetting: storage.getString('profilePhotoSetting') || 'Hiç kimse',
+  aboutSetting: storage.getString('aboutSetting') || 'Hiç kimse',
+  groupsSetting: storage.getString('groupsSetting') || 'Hiç kimse',
+  statusSetting: storage.getString('statusSetting') || 'Hiç kimse',
+  connectionSetting: storage.getString('connectionSetting') || 'Hiç kimse',
+  avatarSetting: storage.getString('avatarSetting') || 'Hiç kimse',
   isLoading: false,
   error: null,
 };
@@ -102,6 +109,31 @@ const userSlice = createSlice({
       state.notificationEnabled = action.payload;
       storage.set('notificationEnabled', action.payload.toString());
     },
+
+    setLastSeenSetting: (state, action: PayloadAction<string>) => {
+      state.lastSeenSetting = action.payload;
+      storage.set('lastSeenSetting', action.payload);
+    },
+
+    setProfilePhotoSetting: (state, action: PayloadAction<string>) => {
+      state.profilePhotoSetting = action.payload;
+      storage.set('profilePhotoSetting', action.payload);
+    },
+
+    setAboutSetting: (state, action: PayloadAction<string>) => {
+      state.aboutSetting = action.payload;
+      storage.set('aboutSetting', action.payload);
+    },
+
+    setGroupsSetting: (state, action: PayloadAction<string>) => {
+      state.groupsSetting = action.payload;
+      storage.set('groupsSetting', action.payload);
+    },
+
+    setStatusSetting: (state, action: PayloadAction<string>) => {
+      state.statusSetting = action.payload;
+      storage.set('statusSetting', action.payload);
+    },
   },
 });
 
@@ -118,6 +150,11 @@ export const {
   setTheme,
   setOnboarding,
   setNotificationEnabled,
+  setLastSeenSetting,
+  setProfilePhotoSetting,
+  setAboutSetting,
+  setGroupsSetting,
+  setStatusSetting,
 } = userSlice.actions;
 
 export default userSlice.reducer;

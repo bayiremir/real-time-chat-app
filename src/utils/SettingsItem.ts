@@ -80,7 +80,7 @@ export const settingsData: SettingsSection[] = [
         id: 'privacy',
         iconType: 'shield',
         title: 'Gizlilik',
-        action: 'handlePrivacy',
+        action: 'handleSecurity',
       },
       {
         id: 'chats',
@@ -129,7 +129,7 @@ export type SettingsActionHandlers = {
   handleStarred: () => void;
   handleConnectedDevices: () => void;
   navigateToProfile: () => void;
-  handlePrivacy: () => void;
+  handleSecurity: () => void;
   handleChats: () => void;
   navigateToNotifications: () => void;
   handleStorageData: () => void;

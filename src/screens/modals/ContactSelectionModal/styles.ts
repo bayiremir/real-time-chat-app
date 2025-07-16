@@ -34,7 +34,6 @@ export const styles = StyleSheet.create({
     fontSize: 17,
     fontFamily: Fonts.Helvetica,
     color: '#000',
-    fontWeight: '600',
   },
   headerCount: {
     fontSize: 13,
@@ -53,7 +52,6 @@ export const styles = StyleSheet.create({
     fontSize: 17,
     fontFamily: Fonts.Helvetica,
     color: '#25D366',
-    fontWeight: '600',
   },
   disabledCreateText: {
     color: '#8E8E93',
@@ -166,6 +164,6 @@ export const styles = StyleSheet.create({
   checkmarkText: {
     color: 'white',
     fontSize: 12,
-    fontWeight: 'bold',
+    fontFamily: Fonts.Helvetica,
   },
 });

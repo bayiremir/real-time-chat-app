@@ -7,9 +7,16 @@ import {Message} from '../../../interfaces/api.interface';
 interface MessageItemProps {
   message: Message;
   isLastMessage?: boolean;
+  onPress?: () => void;
+  onLongPress?: () => void;
 }
 
-const MessageItem = ({message, isLastMessage}: MessageItemProps) => {
+const MessageItem = ({
+  message,
+  isLastMessage,
+  onPress,
+  onLongPress,
+}: MessageItemProps) => {
   // Get current user ID from the provided data
   const currentUserId = '686faa8b032d6343127f5ea6'; // Emir Bayır's ID from the chat data
   const isOwnMessage = message.sender?._id === currentUserId;
@@ -76,7 +83,9 @@ const MessageItem = ({message, isLastMessage}: MessageItemProps) => {
           styles.messageBubble,
           isOwnMessage ? styles.ownBubble : styles.otherBubble,
         ]}
-        activeOpacity={0.7}>
+        activeOpacity={0.7}
+        onPress={onPress}
+        onLongPress={onLongPress}>
         {!isOwnMessage && message.sender && (
           <Text style={styles.senderName}>
             {(message.sender as any).fullName ||

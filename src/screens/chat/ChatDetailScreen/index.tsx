@@ -1,7 +1,14 @@
 import React, {useEffect, useRef, useCallback} from 'react';
-import {View, FlatList, Platform, KeyboardAvoidingView} from 'react-native';
+import {
+  View,
+  FlatList,
+  Platform,
+  KeyboardAvoidingView,
+  Alert,
+} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useRoute, RouteProp} from '@react-navigation/native';
+import {useSelector, useDispatch} from 'react-redux';
 import {styles} from './styles';
 import ChatHeader from '../../../components/chat_components/ChatHeader';
 import MessageItem from '../../../components/chat_components/MessageItem';
@@ -11,6 +18,13 @@ import {
   useMarkAllChatMessagesAsReadMutation,
 } from '../../../redux/services/mobileApi';
 import {RootStackParamList} from '../../../navigation/types';
+import {RootState} from '../../../redux/store';
+import {
+  addToStarred,
+  removeFromStarred,
+  isMessageStarred,
+} from '../../../redux/slices/starredMessagesSlice';
+import {Message} from '../../../interfaces/api.interface';
 
 type ChatDetailRouteProp = RouteProp<RootStackParamList, 'ChatDetail'>;
 
@@ -19,6 +33,7 @@ const ChatDetailScreen = () => {
   const {chat} = route.params;
   const flatListRef = useRef<FlatList>(null);
   const insets = useSafeAreaInsets();
+  const dispatch = useDispatch();
 
   // API calls
   const {data: messagesData, refetch} = useGetChatMessagesQuery({
@@ -27,6 +42,46 @@ const ChatDetailScreen = () => {
   });
 
   const [markAllAsRead] = useMarkAllChatMessagesAsReadMutation();
+
+  // Redux'tan starred messages state'ini al
+  const starredMessagesState = useSelector(
+    (state: RootState) => state.starredMessages,
+  );
+
+  // Uzun basma handler'ı
+  const handleMessageLongPress = useCallback(
+    (message: Message) => {
+      const starred = isMessageStarred(
+        {starredMessages: starredMessagesState},
+        message._id,
+      );
+      const actionText = starred ? 'Yıldızdan Kaldır' : 'Yıldızla';
+
+      Alert.alert(
+        'Mesaj Seçenekleri',
+        'Bu mesaj için ne yapmak istiyorsunuz?',
+        [
+          {
+            text: 'İptal',
+            style: 'cancel',
+          },
+          {
+            text: actionText,
+            onPress: () => {
+              if (starred) {
+                dispatch(removeFromStarred(message._id));
+                Alert.alert('Başarılı', 'Mesaj yıldızlılardan kaldırıldı');
+              } else {
+                dispatch(addToStarred(message));
+                Alert.alert('Başarılı', 'Mesaj yıldızlılara eklendi');
+              }
+            },
+          },
+        ],
+      );
+    },
+    [dispatch, starredMessagesState],
+  );
 
   // Improved scroll to bottom function
   const scrollToBottom = useCallback(
@@ -87,7 +142,13 @@ const ChatDetailScreen = () => {
 
   const renderMessage = ({item, index}: {item: any; index: number}) => {
     const isLastMessage = index === (messagesData?.data?.length || 0) - 1;
-    return <MessageItem message={item} isLastMessage={isLastMessage} />;
+    return (
+      <MessageItem
+        message={item}
+        isLastMessage={isLastMessage}
+        onLongPress={() => handleMessageLongPress(item)}
+      />
+    );
   };
 
   return (

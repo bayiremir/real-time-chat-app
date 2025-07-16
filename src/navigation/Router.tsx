@@ -6,8 +6,6 @@ import TabStack from './stack/TabStack';
 import AuthStack from './stack/AuthStack';
 import ChatDetailScreen from '../screens/chat/ChatDetailScreen';
 import UserSearchScreen from '../screens/other/UserSearchScreen';
-import ContactsScreen from '../screens/tabs/ContactsScreen';
-import ProfileScreen from '../screens/tabs/ProfileScreen';
 import GroupChatCreationScreen from '../screens/chat/GroupChatCreationScreen';
 import ChatInfoScreen from '../screens/chat/ChatInfoScreen';
 import NotificationsScreen from '../screens/other/NotificationsScreen';
@@ -18,12 +16,16 @@ import ListDetailScreen from '../screens/drawer/ListDetailScreen';
 import BulkMessageScreen from '../screens/drawer/BulkMessageScreen';
 import StarChatScreen from '../screens/drawer/StarChatScreen';
 import ConnectedDevicesScreen from '../screens/drawer/ConnectedDevicesScreen';
-// Modal screens
 import ReorderListModal from '../screens/modals/ReorderListModal';
 import CreateListModal from '../screens/modals/CreateListModal';
 import ContactSelectionModal from '../screens/modals/ContactSelectionModal';
 import AddMemberModal from '../screens/modals/AddMemberModal';
 import AddBulkModal from '../screens/modals/AddBulkModal';
+import ForwardMessageModal from '../screens/modals/ForwardMessageModal';
+import ProfileScreen from '../screens/drawer/ProfileScreen';
+import ContactsScreen from '../screens/drawer/ContactsScreen';
+import SecurityScreen from '../screens/drawer/SecurityScreen';
+import ProfileListPickerScreen from '../screens/other/ProfileListPickerScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -177,6 +179,30 @@ const Router = () => {
           options={{
             headerShown: false,
             presentation: 'modal',
+          }}
+        />
+        <Stack.Screen
+          name="ForwardMessageModal"
+          component={ForwardMessageModal}
+          options={{
+            headerShown: false,
+            presentation: 'modal',
+          }}
+        />
+        <Stack.Screen
+          name="SecurityScreen"
+          component={SecurityScreen}
+          options={{
+            headerShown: false,
+            presentation: 'card',
+          }}
+        />
+        <Stack.Screen
+          name="ProfileListPickerScreen"
+          component={ProfileListPickerScreen}
+          options={{
+            headerShown: false,
+            presentation: 'card',
           }}
         />
       </Stack.Navigator>

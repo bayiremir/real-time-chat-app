@@ -14,4 +14,11 @@ export type userSliceInitialStateType = {
   language: string;
   isLoading: boolean;
   error: string | null;
+  lastSeenSetting: string;
+  profilePhotoSetting: string;
+  aboutSetting: string;
+  groupsSetting: string;
+  statusSetting: string;
+  connectionSetting: string;
+  avatarSetting: string;
 };

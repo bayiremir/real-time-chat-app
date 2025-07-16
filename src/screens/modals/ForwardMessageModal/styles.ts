@@ -41,20 +41,76 @@ export const styles = StyleSheet.create({
     color: '#8E8E93',
     marginTop: 1,
   },
-  createButton: {
-    paddingVertical: 8,
-    paddingHorizontal: 4,
+  forwardButton: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: '#25D366',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  disabledCreateButton: {
+  disabledForwardButton: {
+    backgroundColor: '#8E8E93',
     opacity: 0.5,
   },
-  createText: {
-    fontSize: 17,
-    fontFamily: Fonts.Helvetica,
-    color: '#25D366',
+  messagePreview: {
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    backgroundColor: COLORS.whiteColor,
+    borderRadius: 10,
+    marginHorizontal: 20,
+    marginBottom: 16,
   },
-  disabledCreateText: {
+  messagePreviewTitle: {
+    fontSize: 13,
+    fontFamily: Fonts.Helvetica,
     color: '#8E8E93',
+    marginBottom: 8,
+  },
+  messageContent: {
+    backgroundColor: '#F5F5F5',
+    borderRadius: 8,
+    padding: 12,
+  },
+  messageText: {
+    fontSize: 15,
+    fontFamily: Fonts.Helvetica,
+    color: '#000',
+    lineHeight: 20,
+  },
+  actionButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    backgroundColor: COLORS.whiteColor,
+    borderRadius: 10,
+    marginHorizontal: 20,
+    marginBottom: 16,
+  },
+  actionButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+    minWidth: 80,
+  },
+  starButton: {
+    backgroundColor: '#FFF9E6',
+  },
+  shareButton: {
+    backgroundColor: '#E6F3FF',
+  },
+  deleteButton: {
+    backgroundColor: '#FFE6E6',
+  },
+  actionButtonText: {
+    fontSize: 12,
+    fontFamily: Fonts.Helvetica,
+    color: '#000',
+    marginTop: 4,
+    textAlign: 'center',
   },
   searchContainer: {
     paddingHorizontal: 20,
@@ -74,21 +130,6 @@ export const styles = StyleSheet.create({
     fontFamily: Fonts.Helvetica,
     color: '#000',
     marginLeft: 8,
-  },
-  infoContainer: {
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    backgroundColor: COLORS.whiteColor,
-    borderRadius: 10,
-    marginHorizontal: 20,
-    marginBottom: 20,
-  },
-  infoText: {
-    fontSize: 13,
-    fontFamily: Fonts.Helvetica,
-    color: '#8E8E93',
-    textAlign: 'center',
-    lineHeight: 18,
   },
   contactsList: {
     flex: 1,

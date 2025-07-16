@@ -34,7 +34,6 @@ export const styles = StyleSheet.create({
     fontSize: 17,
     fontFamily: Fonts.Helvetica,
     color: '#000',
-    fontWeight: '600',
   },
   createButton: {
     paddingVertical: 8,
@@ -47,7 +46,6 @@ export const styles = StyleSheet.create({
     fontSize: 17,
     fontFamily: Fonts.Helvetica,
     color: '#25D366',
-    fontWeight: '600',
   },
   disabledCreateText: {
     color: '#8E8E93',
