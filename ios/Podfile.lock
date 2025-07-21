@@ -43,6 +43,7 @@ PODS:
     - React-RCTText (= 0.76.0)
     - React-RCTVibration (= 0.76.0)
   - React-callinvoker (0.76.0)
+  - React-Codegen (0.1.0)
   - React-Core (0.76.0):
     - glog
     - hermes-engine
@@ -1305,6 +1306,8 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+  - react-native-netinfo (11.4.1):
+    - React-Core
   - react-native-safe-area-context (5.5.1):
     - DoubleConversion
     - glog
@@ -1659,6 +1662,8 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+  - RNFS (2.20.0):
+    - React-Core
   - RNGestureHandler (2.27.1):
     - DoubleConversion
     - glog
@@ -1799,7 +1804,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNScreens (4.11.1):
+  - RNScreens (3.37.0):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1820,9 +1825,9 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - RNScreens/common (= 4.11.1)
+    - RNScreens/common (= 3.37.0)
     - Yoga
-  - RNScreens/common (4.11.1):
+  - RNScreens/common (3.37.0):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1888,6 +1893,28 @@ PODS:
     - ReactCommon/turbomodule/core
     - Yoga
   - SocketRocket (0.7.1)
+  - stream-chat-react-native (8.1.1):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.01.01.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Codegen
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
   - Yoga (0.0.0)
 
 DEPENDENCIES:
@@ -1931,6 +1958,7 @@ DEPENDENCIES:
   - react-native-document-picker (from `../node_modules/react-native-document-picker`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-mmkv (from `../node_modules/react-native-mmkv`)
+  - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-nativeconfig (from `../node_modules/react-native/ReactCommon`)
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
@@ -1960,14 +1988,17 @@ DEPENDENCIES:
   - ReactCodegen (from `build/generated/ios`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCPicker (from `../node_modules/@react-native-picker/picker`)"
+  - RNFS (from `../node_modules/react-native-fs`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
+  - stream-chat-react-native (from `../node_modules/stream-chat-react-native`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
   trunk:
+    - React-Codegen
     - SocketRocket
 
 EXTERNAL SOURCES:
@@ -2048,6 +2079,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-image-picker"
   react-native-mmkv:
     :path: "../node_modules/react-native-mmkv"
+  react-native-netinfo:
+    :path: "../node_modules/@react-native-community/netinfo"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   React-nativeconfig:
@@ -2106,6 +2139,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNCPicker:
     :path: "../node_modules/@react-native-picker/picker"
+  RNFS:
+    :path: "../node_modules/react-native-fs"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNReanimated:
@@ -2114,6 +2149,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-screens"
   RNSVG:
     :path: "../node_modules/react-native-svg"
+  stream-chat-react-native:
+    :path: "../node_modules/stream-chat-react-native"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -2130,6 +2167,7 @@ SPEC CHECKSUMS:
   RCTTypeSafety: 23df4344c69c602e1c5a8053a93c633af1bee825
   React: cf99f97aa57ce39ab4d3d4f396e01a3f30f3c8ad
   React-callinvoker: bec5283f86b784de5a1ba807e31cb4f177765507
+  React-Codegen: 4b8b4817cea7a54b83851d4c1f91f79aa73de30a
   React-Core: 606c08c616ffad997ad9ebb1e0492af57a23b023
   React-CoreModules: 8d9b8656e2a944798ab84b50efbd16df856af972
   React-cxxreact: 447f344bac6ff34795336c65ff39c61674809833
@@ -2156,6 +2194,7 @@ SPEC CHECKSUMS:
   react-native-document-picker: 0ec4f0abaa488744e6c1d73ef7f47dc6a6861fc1
   react-native-image-picker: 91f4e8dd458db2acdb278479e960bc224cbf0217
   react-native-mmkv: d9af389b132ca3a56f93eb4225c92f397f435f33
+  react-native-netinfo: cec9c4e86083cb5b6aba0e0711f563e2fbbff187
   react-native-safe-area-context: adae05b37dcdc5771a018bcd83337d177c3ab041
   React-nativeconfig: 72c10ff34863148ef90df9c9c8eacba99d2faaaa
   React-NativeModulesApple: 71fd2cce69bcd2c46673cf6afedb4935b47bf230
@@ -2185,11 +2224,13 @@ SPEC CHECKSUMS:
   ReactCodegen: ff7512e124e3dc1363a4930a209d033354d2042a
   ReactCommon: cde69a75746e8d7131f61c27155ee9dc42117003
   RNCPicker: 3676a8a70c9602dab839b01bd7c245a0e55e54ac
+  RNFS: 89de7d7f4c0f6bafa05343c578f61118c8282ed8
   RNGestureHandler: 90a94cd1ec2680cd5811725f9ba3ab840765c497
   RNReanimated: 1771cd2ba649a08588e93341c732048a4b05a0dd
-  RNScreens: 3dad3f26f73966bce7e956589eb0f6f27c0cc12b
+  RNScreens: 7d4100de600676228d6330ccc84f0fef8343c7e3
   RNSVG: 44fe4eff653bd1d7d36db12f431085847ab83103
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
+  stream-chat-react-native: 90e3ff603eb43c67690390c0b0db8e8c9aaac4bb
   Yoga: f8ec45ce98bba1bc93dd28f2ee37215180e6d2b6
 
 PODFILE CHECKSUM: 2a5530ccd14fdf4b88276dcc130a76c12b6252bc
