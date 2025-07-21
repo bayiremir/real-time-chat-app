@@ -14,6 +14,7 @@ export const styles = StyleSheet.create({
   headerContainer: {
     alignItems: 'center',
     marginBottom: 40,
+    marginTop: 40,
   },
   logo: {
     width: 80,

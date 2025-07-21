@@ -5,6 +5,8 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {styles} from './styles';
 import {Chat} from '../../../interfaces/api.interface';
 import {RootStackParamList} from '../../../navigation/types';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../../redux/store';
 
 type ChatSectionNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -17,7 +19,12 @@ interface ChatProps {
 
 const ChatSection = ({chat}: ChatProps) => {
   const navigation = useNavigation<ChatSectionNavigationProp>();
-  const otherParticipant = chat.participants.find(p => p.user !== null)?.user;
+  const {user} = useSelector((state: RootState) => state.userSlice);
+
+  // Find the other participant (not the current user)
+  const otherParticipant = chat.participants.find(
+    p => p.user !== null && p.user._id !== user?._id,
+  )?.user;
 
   if (!otherParticipant) {
     return null; // Don't render if no valid participant
@@ -59,7 +66,7 @@ const ChatSection = ({chat}: ChatProps) => {
       onPress={handleChatPress}>
       <View style={styles.avatarContainer}>
         <Image
-          source={{uri: chat.participants[1].user?.avatar}}
+          source={{uri: otherParticipant.avatar || ''}}
           style={styles.avatar}
         />
       </View>
@@ -67,7 +74,7 @@ const ChatSection = ({chat}: ChatProps) => {
       <View style={styles.chatInfo}>
         <View style={styles.chatHeader}>
           <Text style={styles.userName} numberOfLines={1}>
-            {chat.participants[1].user?.fullName}
+            {`${otherParticipant.firstName} ${otherParticipant.lastName}`.trim()}
           </Text>
           <Text style={styles.lastActivity}>
             {formatLastActivity(chat.lastActivity)}

@@ -4,7 +4,6 @@ import {
   TextInput,
   TouchableOpacity,
   ActivityIndicator,
-  Alert,
 } from 'react-native';
 import React, {useState, useCallback, useRef} from 'react';
 import {styles} from './styles';
@@ -78,14 +77,6 @@ const LoginScreen = () => {
     navigation.navigate('RegisterScreen');
   }, [navigation]);
 
-  const handleForgotPassword = useCallback(() => {
-    Alert.alert(
-      'Şifremi Unuttum',
-      'Şifre sıfırlama özelliği yakında eklenecektir.',
-      [{text: 'Tamam'}],
-    );
-  }, []);
-
   const isButtonDisabled = !phoneNumber.trim() || isLoading;
 
   return (
@@ -97,7 +88,6 @@ const LoginScreen = () => {
       enableOnAndroid={true}
       extraScrollHeight={20}
       keyboardOpeningTime={250}>
-      {/* Header */}
       <View style={styles.headerContainer}>
         <View style={styles.logo}>
           <ChatBubbleLeftIcon size={24} color="white" />
@@ -108,7 +98,6 @@ const LoginScreen = () => {
         </Text>
       </View>
 
-      {/* Form */}
       <View style={styles.formContainer}>
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Telefon Numarası</Text>
@@ -162,23 +151,14 @@ const LoginScreen = () => {
             <Text style={styles.loginButtonText}>Giriş Yap</Text>
           )}
         </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.forgotPasswordContainer}
-          onPress={handleForgotPassword}
-          activeOpacity={0.7}>
-          <Text style={styles.forgotPasswordText}>Şifremi Unuttum</Text>
-        </TouchableOpacity>
       </View>
 
-      {/* Divider */}
       <View style={styles.orContainer}>
         <View style={styles.orLine} />
         <Text style={styles.orText}>veya</Text>
         <View style={styles.orLine} />
       </View>
 
-      {/* Register Link */}
       <View style={styles.registerContainer}>
         <Text style={styles.registerText}>Hesabınız yok mu?</Text>
         <TouchableOpacity onPress={handleRegister} activeOpacity={0.7}>

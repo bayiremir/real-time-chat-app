@@ -9,6 +9,8 @@ import {
 import {Chat} from '../../../interfaces/api.interface';
 import {styles} from './styles';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../../redux/store';
 
 interface ChatHeaderProps {
   chat: Chat;
@@ -18,8 +20,12 @@ const ChatHeader = ({chat}: ChatHeaderProps) => {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
   const statusBarHeight = insets.top;
-  // Get the other participant
-  const otherParticipant = chat.participants.find(p => p.user !== null)?.user;
+  const {user} = useSelector((state: RootState) => state.userSlice);
+
+  // Find the other participant (not the current user)
+  const otherParticipant = chat.participants.find(
+    p => p.user !== null && p.user._id !== user?._id,
+  )?.user;
 
   if (!otherParticipant) {
     return null;
@@ -46,14 +52,14 @@ const ChatHeader = ({chat}: ChatHeaderProps) => {
         activeOpacity={0.7}>
         <View style={styles.avatarContainer}>
           <Image
-            source={{uri: chat.participants[1].user?.avatar}}
+            source={{uri: otherParticipant.avatar || ''}}
             style={styles.avatar}
           />
         </View>
 
         <View style={styles.textContainer}>
           <Text style={styles.userName} numberOfLines={1}>
-            {chat.participants[1].user?.fullName}
+            {`${otherParticipant.firstName} ${otherParticipant.lastName}`.trim()}
           </Text>
         </View>
       </TouchableOpacity>

@@ -3,7 +3,6 @@ import {useSelector} from 'react-redux';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import TabStack from './stack/TabStack';
-import AuthStack from './stack/AuthStack';
 import ChatDetailScreen from '../screens/chat/ChatDetailScreen';
 import UserSearchScreen from '../screens/other/UserSearchScreen';
 import GroupChatCreationScreen from '../screens/chat/GroupChatCreationScreen';
@@ -18,6 +17,9 @@ import AddBulkModal from '../screens/modals/AddBulkModal';
 import ForwardMessageModal from '../screens/modals/ForwardMessageModal';
 import ProfileScreen from '../screens/drawer/ProfileScreen';
 import ContactsScreen from '../screens/drawer/ContactsScreen';
+import LoginScreen from '../screens/auth/LoginScreen';
+import RegisterScreen from '../screens/auth/RegisterScreen';
+import EntryCodeScreen from '../screens/auth/EntryCodeScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -25,7 +27,18 @@ const Router = () => {
   const {authLogin} = useSelector((state: RootState) => state.userSlice);
 
   if (!authLogin) {
-    return <AuthStack />;
+    return (
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}>
+          <Stack.Screen name="LoginScreen" component={LoginScreen} />
+          <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+          <Stack.Screen name="EntryCodeScreen" component={EntryCodeScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
   }
 
   return (

@@ -1,8 +1,10 @@
 import React, {useRef} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {CheckIcon} from 'react-native-heroicons/solid';
+import {useSelector} from 'react-redux';
 import {styles} from './styles';
 import {Message} from '../../../interfaces/api.interface';
+import {RootState} from '../../../redux/store';
 
 interface MessageItemProps {
   message: Message;
@@ -22,10 +24,10 @@ const MessageItem = ({
   isHighlighted = false,
 }: MessageItemProps) => {
   const touchableRef = useRef<View>(null);
+  const {user} = useSelector((state: RootState) => state.userSlice);
 
-  // Get current user ID from the provided data
-  const currentUserId = '686faa8b032d6343127f5ea6'; // Emir Bayır's ID from the chat data
-  const isOwnMessage = message.sender?._id === currentUserId;
+  // Check if the message is from the current user
+  const isOwnMessage = message.sender?._id === user?._id;
 
   const handleLongPress = () => {
     if (touchableRef.current && onLongPress) {

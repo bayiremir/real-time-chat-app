@@ -4,6 +4,9 @@ import {User} from '../interfaces/api.interface';
 
 export type RootStackParamList = {
   TabStack: undefined;
+  LoginScreen: undefined;
+  RegisterScreen: undefined;
+  EntryCodeScreen: undefined;
   ChatDetailScreen: {
     chat: Chat;
   };

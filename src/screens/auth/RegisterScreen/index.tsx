@@ -12,7 +12,6 @@ import {useNavigation} from '@react-navigation/native';
 import {RegisterScreenNavigationProp} from '../../../interfaces/navigation.interface';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {usePhoneRegisterMutation} from '../../../redux/services/mobileApi';
-import {ChatBubbleLeftIcon} from 'react-native-heroicons/outline';
 
 const RegisterScreen = () => {
   const navigation = useNavigation<RegisterScreenNavigationProp>();
@@ -151,9 +150,6 @@ const RegisterScreen = () => {
       keyboardOpeningTime={250}>
       {/* Header */}
       <View style={styles.headerContainer}>
-        <View style={styles.logo}>
-          <ChatBubbleLeftIcon size={24} color="white" />
-        </View>
         <Text style={styles.welcomeText}>Hesap Oluştur</Text>
         <Text style={styles.subtitleText}>
           Yeni hesap oluşturmak için bilgilerinizi giriniz
