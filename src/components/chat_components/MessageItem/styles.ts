@@ -38,6 +38,9 @@ export const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     borderBottomLeftRadius: 2,
   },
+  dimmedMessage: {
+    opacity: 0.3,
+  },
   senderName: {
     fontSize: 13,
     fontFamily: Fonts.Bold,

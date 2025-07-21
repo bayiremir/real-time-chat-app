@@ -74,11 +74,11 @@ const ProfileListPickerScreen = () => {
   const getDescription = () => {
     switch (title) {
       case 'Son görülme ve çevrimiçi':
-        return 'Son görülme bilginizi kimler görebileceklerini seçin. Son görülme bilginizi kapatırsanız diğer kişilerin son görülme bilgisini de göremezsiniz.';
+        return 'Son görülme ve çevrimiçi bilginizi paylaşmazsanız diğer kullanıcıların son görülme ve çevrimiçi bilgisini de göremezsiniz.';
       case 'Profil fotoğrafı':
-        return 'Profil fotoğrafınızı kimler görebileceklerini seçin. Bu ayar profil fotoğrafınızın görünürlüğünü kontrol eder.';
+        return '';
       case 'Hakkımda':
-        return 'Hakkımda bilginizi kimler görebileceklerini seçin. Bu kişisel bilgilerinizin görünürlüğünü kontrol eder.';
+        return '';
       case 'Gruplar':
         return 'Sizi gruplara kimlerin ekleyebileceğini seçin. Bu ayar grup davetlerini kontrol eder.';
       case 'Durum':

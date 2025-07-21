@@ -12,6 +12,8 @@ interface ProfileListItemProps {
   onSwitchChange?: (value: boolean) => void;
   rightText?: string;
   showCheckmark?: boolean;
+  color?: string | undefined;
+  showIcon?: boolean;
 }
 
 const ProfileListItem: React.FC<ProfileListItemProps> = ({
@@ -23,11 +25,15 @@ const ProfileListItem: React.FC<ProfileListItemProps> = ({
   onSwitchChange,
   rightText,
   showCheckmark = false,
+  color,
+  showIcon = true,
 }) => {
   return (
     <>
       <TouchableOpacity style={styles.listItem} onPress={onPress}>
-        <Text style={styles.listItemText}>{title}</Text>
+        <Text style={[styles.listItemText, {color: color || 'black'}]}>
+          {title}
+        </Text>
         {showSwitch ? (
           <Switch
             style={styles.switch}
@@ -37,11 +43,12 @@ const ProfileListItem: React.FC<ProfileListItemProps> = ({
         ) : (
           <View style={styles.rightContainer}>
             {rightText && <Text style={styles.rightText}>{rightText}</Text>}
-            {showCheckmark ? (
-              <CheckIcon size={20} color="green" />
-            ) : (
-              <ChevronRightIcon size={20} color="gray" />
-            )}
+            {showIcon &&
+              (showCheckmark ? (
+                <CheckIcon size={20} color={'green'} />
+              ) : (
+                <ChevronRightIcon size={20} color={'gray'} />
+              ))}
           </View>
         )}
       </TouchableOpacity>

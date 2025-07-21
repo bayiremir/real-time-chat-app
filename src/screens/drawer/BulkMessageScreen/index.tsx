@@ -6,17 +6,10 @@ import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../../../redux/store';
 import {useGetContactsQuery} from '../../../redux/services/mobileApi';
 import {useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RootStackParamList} from '../../../navigation/types';
 import {deleteList} from '../../../redux/slices/listsSlice';
 
-type BulkMessageScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  'BulkMessageScreen'
->;
-
 const BulkMessageScreen = () => {
-  const navigation = useNavigation<BulkMessageScreenNavigationProp>();
+  const navigation = useNavigation();
   const dispatch = useDispatch();
   const [isEditMode, setIsEditMode] = useState(false);
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
@@ -30,7 +23,7 @@ const BulkMessageScreen = () => {
   const bulkGroups = lists.filter((list: any) => list.type === 'bulk');
 
   const handleOpenAddBulkSheet = () => {
-    navigation.navigate('AddBulkModal', {
+    navigation.getParent()?.navigate('AddBulkModal', {
       contacts: contacts,
     });
   };

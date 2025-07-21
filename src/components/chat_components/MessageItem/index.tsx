@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {CheckIcon} from 'react-native-heroicons/solid';
 import {styles} from './styles';
@@ -8,7 +8,9 @@ interface MessageItemProps {
   message: Message;
   isLastMessage?: boolean;
   onPress?: () => void;
-  onLongPress?: () => void;
+  onLongPress?: (ref: any) => void;
+  isDimmed?: boolean;
+  isHighlighted?: boolean;
 }
 
 const MessageItem = ({
@@ -16,10 +18,20 @@ const MessageItem = ({
   isLastMessage,
   onPress,
   onLongPress,
+  isDimmed = false,
+  isHighlighted = false,
 }: MessageItemProps) => {
+  const touchableRef = useRef<View>(null);
+
   // Get current user ID from the provided data
   const currentUserId = '686faa8b032d6343127f5ea6'; // Emir Bayır's ID from the chat data
   const isOwnMessage = message.sender?._id === currentUserId;
+
+  const handleLongPress = () => {
+    if (touchableRef.current && onLongPress) {
+      onLongPress(touchableRef);
+    }
+  };
 
   const formatTime = (timestamp: string) => {
     const date = new Date(timestamp);
@@ -79,13 +91,15 @@ const MessageItem = ({
         isLastMessage && styles.lastMessage,
       ]}>
       <TouchableOpacity
+        ref={touchableRef}
         style={[
           styles.messageBubble,
           isOwnMessage ? styles.ownBubble : styles.otherBubble,
+          isDimmed && !isHighlighted && styles.dimmedMessage,
         ]}
         activeOpacity={0.7}
         onPress={onPress}
-        onLongPress={onLongPress}>
+        onLongPress={handleLongPress}>
         {!isOwnMessage && message.sender && (
           <Text style={styles.senderName}>
             {(message.sender as any).fullName ||

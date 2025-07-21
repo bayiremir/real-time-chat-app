@@ -6,20 +6,22 @@ import {ProfileListItem} from '../../../components/profile_components';
 
 const ProfileScreen = () => {
   return (
-    <ScrollView>
+    <View>
       <GoBackTabBar title="Hesap" />
-      <View style={styles.content}>
-        <ProfileListItem title="Güvenlik bildirimleri" showDivider />
-        <ProfileListItem title="İki adımlı doğrulama" showDivider />
-        <ProfileListItem title="E-posta adresi" showDivider />
-        <ProfileListItem title="Geçiş Anahtarları" showDivider />
-        <ProfileListItem title="Telefon numarasını değiştir" />
-      </View>
-      <View style={styles.content}>
-        <ProfileListItem title="Hesap bilgilerini talep et" showDivider />
-        <ProfileListItem title="Hesabımı sil" />
-      </View>
-    </ScrollView>
+      <ScrollView>
+        <View style={styles.content}>
+          <ProfileListItem title="Güvenlik bildirimleri" showDivider />
+          <ProfileListItem title="İki adımlı doğrulama" showDivider />
+          <ProfileListItem title="E-posta adresi" showDivider />
+          <ProfileListItem title="Geçiş Anahtarları" showDivider />
+          <ProfileListItem title="Telefon numarasını değiştir" />
+        </View>
+        <View style={styles.content}>
+          <ProfileListItem title="Hesap bilgilerini talep et" showDivider />
+          <ProfileListItem title="Hesabımı sil" />
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 

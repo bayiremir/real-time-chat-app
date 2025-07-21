@@ -38,7 +38,7 @@ const SettingsScreen = () => {
   }, [navigation]);
 
   const handleNotificationsPress = useCallback(() => {
-    navigation.navigate('Notifications' as never);
+    navigation.navigate('NotificationsScreen' as never);
   }, [navigation]);
 
   const handleGenericAlert = useCallback((title: string) => {
@@ -70,8 +70,8 @@ const SettingsScreen = () => {
     }, [navigation]),
 
     handleChats: useCallback(() => {
-      handleGenericAlert('Sohbetler');
-    }, [handleGenericAlert]),
+      navigation.navigate('ChatsScreen' as never);
+    }, [navigation]),
 
     navigateToNotifications: handleNotificationsPress,
 

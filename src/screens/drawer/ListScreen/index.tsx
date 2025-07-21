@@ -9,11 +9,11 @@ import {ChevronRightIcon} from 'react-native-heroicons/outline';
 
 import {RootState} from '../../../redux/store';
 
-import {RootStackParamList} from '../../../navigation/types';
+import {SettingsStackParamList} from '../../../navigation/types';
 import {ListItem} from '../../../interfaces/lists.interface';
 
 type ListScreenNavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
+  SettingsStackParamList,
   'ListScreen'
 >;
 
@@ -27,19 +27,19 @@ const ListScreen = () => {
   );
 
   const handleCreateNewList = () => {
-    navigation.navigate('CreateListModal');
+    navigation.getParent()?.navigate('CreateListModal' as never);
   };
 
   const handleReorderLists = () => {
-    navigation.navigate('ReorderListModal', {lists});
+    navigation.getParent()?.navigate('ReorderListModal', {lists} as never);
   };
 
   const handleListPress = (list: ListItem) => {
-    navigation.navigate('ListDetailScreen', {list});
+    navigation.getParent()?.navigate('ListDetailScreen', {list} as never);
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <GoBackTabBar
         title="Listeler"
         children={
@@ -48,41 +48,45 @@ const ListScreen = () => {
           </TouchableOpacity>
         }
       />
-      <Text style={styles.title}>Listeleriniz</Text>
-      <View style={styles.content}>
-        <TouchableOpacity style={styles.listItem} onPress={handleCreateNewList}>
-          <Text style={[styles.listItemText, {color: 'green'}]}>
-            Yeni liste
-          </Text>
-        </TouchableOpacity>
-        <View style={styles.divider} />
+      <ScrollView style={styles.container}>
+        <Text style={styles.title}>Listeleriniz</Text>
+        <View style={styles.content}>
+          <TouchableOpacity
+            style={styles.listItem}
+            onPress={handleCreateNewList}>
+            <Text style={[styles.listItemText, {color: 'green'}]}>
+              Yeni liste
+            </Text>
+          </TouchableOpacity>
+          <View style={styles.divider} />
 
-        {lists.map((list, index) => (
-          <React.Fragment key={list.id}>
-            <TouchableOpacity
-              style={styles.listItem}
-              onPress={() => handleListPress(list)}>
-              <View style={styles.listItemContainer}>
-                <Text style={styles.listItemText}>{list.name}</Text>
-              </View>
-              <View style={styles.rightContainer}>
-                <Text style={styles.listItemText}>
-                  {list.members.length} kişi
-                </Text>
-                <ChevronRightIcon size={20} color="black" />
-              </View>
-            </TouchableOpacity>
-            {index < lists.length - 1 && <View style={styles.divider} />}
-          </React.Fragment>
-        ))}
-      </View>
-      <View style={styles.descriptionContainer}>
-        <Text style={styles.description}>
-          Listelerinizi düzenleyebilir ve listelerinizin Sohbetler sekmesinde
-          gösterilme sırasını değiştirebilirisiniz.
-        </Text>
-      </View>
-    </ScrollView>
+          {lists.map((list, index) => (
+            <React.Fragment key={list.id}>
+              <TouchableOpacity
+                style={styles.listItem}
+                onPress={() => handleListPress(list)}>
+                <View style={styles.listItemContainer}>
+                  <Text style={styles.listItemText}>{list.name}</Text>
+                </View>
+                <View style={styles.rightContainer}>
+                  <Text style={styles.listItemText}>
+                    {list.members.length} kişi
+                  </Text>
+                  <ChevronRightIcon size={20} color="black" />
+                </View>
+              </TouchableOpacity>
+              {index < lists.length - 1 && <View style={styles.divider} />}
+            </React.Fragment>
+          ))}
+        </View>
+        <View style={styles.descriptionContainer}>
+          <Text style={styles.description}>
+            Listelerinizi düzenleyebilir ve listelerinizin Sohbetler sekmesinde
+            gösterilme sırasını değiştirebilirisiniz.
+          </Text>
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 

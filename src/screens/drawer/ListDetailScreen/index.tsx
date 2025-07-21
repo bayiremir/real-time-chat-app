@@ -12,7 +12,7 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useDispatch, useSelector} from 'react-redux';
 import GoBackTabBar from '../../../components/tab_components/GoBackTabBar';
 import {PlusIcon} from 'react-native-heroicons/outline';
-import {RootStackParamList} from '../../../navigation/types';
+import {SettingsStackParamList} from '../../../navigation/types';
 import {RootState} from '../../../redux/store';
 import {
   deleteList,
@@ -22,11 +22,11 @@ import {useGetContactsQuery} from '../../../redux/services/mobileApi';
 import {styles} from './styles';
 
 type ListDetailScreenRouteProp = RouteProp<
-  RootStackParamList,
+  SettingsStackParamList,
   'ListDetailScreen'
 >;
 type ListDetailScreenNavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
+  SettingsStackParamList,
   'ListDetailScreen'
 >;
 
@@ -49,7 +49,7 @@ const ListDetailScreen = () => {
   });
 
   const handleAddMember = () => {
-    navigation.navigate('AddMemberModal', {
+    navigation.getParent()?.navigate('AddMemberModal', {
       contacts: contactsData?.data || [],
       listId: displayList.id,
       existingMembers: displayList.members,
@@ -106,15 +106,15 @@ const ListDetailScreen = () => {
 
   return (
     <>
+      <GoBackTabBar
+        title={displayList.name}
+        children={
+          <TouchableOpacity onPress={handleAddMember}>
+            <Text style={styles.listItemText}>Düzenle</Text>
+          </TouchableOpacity>
+        }
+      />
       <ScrollView style={styles.container}>
-        <GoBackTabBar
-          title={displayList.name}
-          children={
-            <TouchableOpacity onPress={handleAddMember}>
-              <Text style={styles.listItemText}>Düzenle</Text>
-            </TouchableOpacity>
-          }
-        />
         <Text style={styles.sectionTitle}>Dahil edilenler</Text>
         <View style={styles.membersSection}>
           <View style={styles.content}>

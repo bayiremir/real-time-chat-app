@@ -13,12 +13,19 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.whiteColor,
     borderRadius: 10,
   },
+  title: {
+    fontSize: 16,
+    fontFamily: Fonts.Helvetica,
+    color: 'gray',
+    marginHorizontal: 35,
+    marginVertical: 10,
+  },
   description: {
     fontSize: 14,
-    color: '#666666',
-    marginHorizontal: 40,
-    marginTop: 10,
-    lineHeight: 20,
     fontFamily: Fonts.Helvetica,
+    color: 'gray',
+    lineHeight: 16,
+    marginHorizontal: 40,
+    marginBottom: 10,
   },
 });

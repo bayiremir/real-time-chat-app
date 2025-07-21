@@ -2,10 +2,9 @@ import React from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {
-  ArrowLeftIcon,
+  ChevronLeftIcon,
   PhoneIcon,
   VideoCameraIcon,
-  EllipsisVerticalIcon,
 } from 'react-native-heroicons/outline';
 import {Chat} from '../../../interfaces/api.interface';
 import {styles} from './styles';
@@ -38,7 +37,7 @@ const ChatHeader = ({chat}: ChatHeaderProps) => {
   return (
     <View style={[styles.container, {paddingTop: statusBarHeight}]}>
       <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
-        <ArrowLeftIcon size={24} color="#ffffff" />
+        <ChevronLeftIcon size={24} color="#000000" />
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -50,32 +49,21 @@ const ChatHeader = ({chat}: ChatHeaderProps) => {
             source={{uri: chat.participants[1].user?.avatar}}
             style={styles.avatar}
           />
-          {chat.participants[1].user?.isOnline && (
-            <View style={styles.onlineIndicator} />
-          )}
         </View>
 
         <View style={styles.textContainer}>
           <Text style={styles.userName} numberOfLines={1}>
             {chat.participants[1].user?.fullName}
           </Text>
-          <Text style={styles.status} numberOfLines={1}>
-            {chat.participants[1].user?.isOnline
-              ? 'Çevrimiçi'
-              : 'Son görülme yakın zamanda'}
-          </Text>
         </View>
       </TouchableOpacity>
 
       <View style={styles.actionButtons}>
         <TouchableOpacity style={styles.actionButton}>
-          <PhoneIcon size={20} color="#ffffff" />
+          <VideoCameraIcon size={24} color="#000000" />
         </TouchableOpacity>
         <TouchableOpacity style={styles.actionButton}>
-          <VideoCameraIcon size={20} color="#ffffff" />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.actionButton}>
-          <EllipsisVerticalIcon size={20} color="#ffffff" />
+          <PhoneIcon size={20} color="#000000" />
         </TouchableOpacity>
       </View>
     </View>

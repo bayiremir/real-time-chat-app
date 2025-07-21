@@ -24,7 +24,7 @@ const ChatSection = ({chat}: ChatProps) => {
   }
 
   const handleChatPress = () => {
-    navigation.navigate('ChatDetail', {chat});
+    navigation.navigate('ChatDetailScreen', {chat});
   };
 
   const formatLastActivity = (lastActivity: string) => {
@@ -62,9 +62,6 @@ const ChatSection = ({chat}: ChatProps) => {
           source={{uri: chat.participants[1].user?.avatar}}
           style={styles.avatar}
         />
-        {chat.participants[1].user?.isOnline && (
-          <View style={styles.onlineIndicator} />
-        )}
       </View>
 
       <View style={styles.chatInfo}>

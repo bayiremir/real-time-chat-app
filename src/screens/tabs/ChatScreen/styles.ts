@@ -25,17 +25,14 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 8,
   },
   listItem: {
-    backgroundColor: '#f5f5f5',
+    backgroundColor: 'rgba(0, 0, 0, 0.05)',
     paddingHorizontal: 16,
     paddingVertical: 8,
     marginHorizontal: 4,
     borderRadius: 20,
-    borderWidth: 1,
-    borderColor: '#e0e0e0',
   },
   selectedListItem: {
-    backgroundColor: '#075e54',
-    borderColor: '#075e54',
+    backgroundColor: 'rgba(7, 94, 84, 0.1)',
   },
   listItemText: {
     fontFamily: Fonts.Helvetica,
@@ -43,7 +40,7 @@ export const styles = StyleSheet.create({
     color: '#000',
   },
   selectedListItemText: {
-    color: '#ffffff',
+    color: '#075e54',
     fontFamily: Fonts.Bold,
   },
   chatsContainer: {},

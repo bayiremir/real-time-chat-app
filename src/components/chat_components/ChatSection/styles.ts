@@ -21,17 +21,6 @@ export const styles = StyleSheet.create({
     borderRadius: 25,
     backgroundColor: '#f0f0f0',
   },
-  onlineIndicator: {
-    position: 'absolute',
-    bottom: 2,
-    right: 2,
-    width: 12,
-    height: 12,
-    borderRadius: 6,
-    backgroundColor: '#25D366',
-    borderWidth: 2,
-    borderColor: '#ffffff',
-  },
   chatInfo: {
     flex: 1,
     justifyContent: 'center',

@@ -5,7 +5,7 @@ import ChatScreen from '../../screens/tabs/ChatScreen';
 import UpdateScreen from '../../screens/tabs/UpdateScreen';
 import CallScreen from '../../screens/tabs/CallScreen';
 import CommunityScreen from '../../screens/tabs/CommunityScreen';
-import SettingsScreen from '../../screens/tabs/SettingsScreen';
+import SettingsStack from './SettingsStack';
 
 // Heroicons import
 import {
@@ -73,8 +73,8 @@ const TabStack = () => {
         }}
       />
       <Stack.Screen
-        name="SettingsScreen"
-        component={SettingsScreen}
+        name="SettingsStack"
+        component={SettingsStack}
         options={{
           tabBarLabel: 'Ayarlar',
           tabBarIcon: ({color, size}) => <CogIcon size={size} color={color} />,

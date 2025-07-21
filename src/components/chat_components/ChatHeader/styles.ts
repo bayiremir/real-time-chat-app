@@ -5,23 +5,14 @@ export const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#075e54', // WhatsApp green
+    backgroundColor: '#FFF7EA',
     paddingHorizontal: 16,
     paddingVertical: 12,
-    elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
   },
   backButton: {
     marginRight: 16,
     padding: 4,
   },
-
   userInfo: {
     flex: 1,
     flexDirection: 'row',
@@ -53,21 +44,21 @@ export const styles = StyleSheet.create({
   },
   userName: {
     fontSize: 18,
-    fontFamily: Fonts.Bold,
-    color: '#ffffff',
+    fontFamily: Fonts.Helvetica,
+    color: '#000000',
     marginBottom: 2,
   },
   status: {
     fontSize: 13,
     fontFamily: Fonts.Helvetica,
-    color: '#d1e7dd',
+    color: '#000000',
   },
   actionButtons: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   actionButton: {
-    marginLeft: 16,
+    marginLeft: 5,
     padding: 8,
   },
 });

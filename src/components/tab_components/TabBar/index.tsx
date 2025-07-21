@@ -7,15 +7,20 @@ import {
 } from 'react-native-heroicons/outline';
 import {styles} from './styles';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {useGetContactsQuery} from '../../../redux/services/mobileApi';
 
 const TabBar = () => {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
   const statusBarHeight = insets.top;
+  const {data: contactsData} = useGetContactsQuery({page: 1, limit: 100});
+  const contacts = contactsData?.data || [];
 
-  const handlePlusPress = useCallback(() => {
-    navigation.navigate('ContactsScreen' as never);
-  }, [navigation]);
+  const handleOpenAddBulkSheet = () => {
+    navigation.getParent()?.navigate('AddBulkModal', {
+      contacts: contacts,
+    });
+  };
 
   const handleMenuPress = useCallback(() => {
     // Bu kısım daha sonra menü açmak için kullanılabilir
@@ -37,7 +42,7 @@ const TabBar = () => {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.headerRight}
-          onPress={handlePlusPress}
+          onPress={handleOpenAddBulkSheet}
           activeOpacity={0.7}>
           <PlusOutlineIcon size={16} color="white" strokeWidth={2} />
         </TouchableOpacity>

@@ -4,25 +4,14 @@ import {User} from '../interfaces/api.interface';
 
 export type RootStackParamList = {
   TabStack: undefined;
-  ChatDetail: {
+  ChatDetailScreen: {
     chat: Chat;
   };
   UserSearch: undefined;
   ContactsScreen: undefined;
   ProfileScreen: undefined;
   GroupChatCreation: undefined;
-  ChatInfo: {
-    chat: Chat;
-  };
   Notifications: undefined;
-  ListScreen: undefined;
-  ListDetailScreen: {
-    list: ListItem;
-  };
-  BulkMessageScreen: undefined;
-  StarChatScreen: undefined;
-  ConnectedDevicesScreen: undefined;
-  // Modal screens converted from BottomSheets
   ReorderListModal: {
     lists: ListItem[];
   };
@@ -45,8 +34,9 @@ export type RootStackParamList = {
     message: Message;
     contacts: User[];
   };
-  SecurityScreen: undefined;
-  ProfileListPickerScreen: undefined;
+  ChatInfo: {
+    chat: Chat;
+  };
 };
 
 export type TabStackParamList = {
@@ -54,5 +44,20 @@ export type TabStackParamList = {
   CallScreen: undefined;
   CommunityScreen: undefined;
   UpdateScreen: undefined;
+  SettingsStack: undefined;
+};
+
+export type SettingsStackParamList = {
   SettingsScreen: undefined;
+  ChatsScreen: undefined;
+  SecurityScreen: undefined;
+  StarChatScreen: undefined;
+  ListScreen: undefined;
+  ListDetailScreen: {
+    list: ListItem;
+  };
+  BulkMessageScreen: undefined;
+  ConnectedDevicesScreen: undefined;
+  ProfileListPickerScreen: undefined;
+  NotificationsScreen: undefined;
 };
