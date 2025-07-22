@@ -24,7 +24,7 @@ const TabBar = () => {
 
   const handleMenuPress = useCallback(() => {
     // Bu kısım daha sonra menü açmak için kullanılabilir
-    console.log('Menu pressed');
+    ('Menu pressed');
   }, []);
 
   return (

@@ -1,12 +1,17 @@
-import {useState, useMemo} from 'react';
+import {useState, useMemo, useEffect} from 'react';
 import {useListChatsQuery} from '../redux/services/mobileApi';
 import {useSelector} from 'react-redux';
 import {RootState} from '../redux/store';
 import {ListItem} from '../interfaces/lists.interface';
+import {useSocket} from './useSocket';
 
 export const useChatScreen = () => {
-  const {data, isLoading} = useListChatsQuery({});
+  const {data, isLoading, refetch} = useListChatsQuery({});
   const lists = useSelector((state: RootState) => state.listsSlice.lists);
+
+  // Socket integration for real-time chat list updates
+  const {newMessage, messageSent, clearNewMessage, clearMessageSent} =
+    useSocket();
 
   // State for selected list - default to "Tümü" (All)
   const [selectedListId, setSelectedListId] = useState<string | null>(null);
@@ -53,6 +58,21 @@ export const useChatScreen = () => {
       selectedListId === listId || (selectedListId === null && listId === 'all')
     );
   };
+
+  // Listen for socket events and refetch chat list
+  useEffect(() => {
+    if (newMessage) {
+      refetch(); // Refetch chat list when new message is received
+      clearNewMessage();
+    }
+  }, [newMessage, refetch, clearNewMessage]);
+
+  useEffect(() => {
+    if (messageSent) {
+      refetch(); // Refetch chat list when message is sent
+      clearMessageSent();
+    }
+  }, [messageSent, refetch, clearMessageSent]);
 
   return {
     data,

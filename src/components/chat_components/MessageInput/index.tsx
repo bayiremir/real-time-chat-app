@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {
   View,
   TextInput,
@@ -20,38 +20,114 @@ import {
   useSendMessageMutation,
   useSendMessageWithFileMutation,
 } from '../../../redux/services/mobileApi';
+import {useSocket} from '../../../hooks/useSocket';
 
 interface MessageInputProps {
   chatId: string;
   onMessageSent?: () => void;
   onLayout?: (e: LayoutChangeEvent) => void;
+  useSocket?: boolean; // Option to use socket or API
 }
 
-const MessageInput = ({chatId, onMessageSent, onLayout}: MessageInputProps) => {
+const MessageInput = ({
+  chatId,
+  onMessageSent,
+  onLayout,
+  useSocket: useSocketForSending = true,
+}: MessageInputProps) => {
   const [message, setMessage] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
+  const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const textInputRef = useRef<TextInput>(null);
   const [sendMessage, {isLoading: isSendingMessage}] = useSendMessageMutation();
   const [sendFileMessage, {isLoading: isSendingFile}] =
     useSendMessageWithFileMutation();
 
+  // Socket integration
+  const {
+    connected: socketConnected,
+    sendMessage: socketSendMessage,
+    startTyping,
+    stopTyping,
+  } = useSocket();
+
   const handleSendMessage = async () => {
     if (!message.trim()) return;
 
-    try {
-      await sendMessage({
-        chatId,
-        content: message.trim(),
-        type: 'text',
-      }).unwrap();
+    const messageContent = message.trim();
 
-      setMessage('');
+    // Clear input immediately for better UX
+    setMessage('');
+
+    // Stop typing indicator
+    if (isTyping && socketConnected && useSocketForSending) {
+      stopTyping({chatId});
+      setIsTyping(false);
+    }
+
+    try {
+      if (useSocketForSending && socketConnected) {
+        // Send via socket for real-time delivery
+
+        socketSendMessage({
+          chatId,
+          content: messageContent,
+          type: 'text',
+        });
+      } else {
+        await sendMessage({
+          chatId,
+          content: messageContent,
+          type: 'text',
+        }).unwrap();
+      }
+
       textInputRef.current?.focus();
       onMessageSent?.();
     } catch (error) {
       console.error('Error sending message:', error);
       Alert.alert('Hata', 'Mesaj gönderilemedi');
+      // Restore message on error
+      setMessage(messageContent);
     }
   };
+
+  const handleTyping = (text: string) => {
+    setMessage(text);
+
+    if (!useSocketForSending || !socketConnected) return;
+
+    // Start typing indicator
+    if (!isTyping && text.length > 0) {
+      startTyping({chatId});
+      setIsTyping(true);
+    }
+
+    // Reset typing timeout
+    if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current);
+    }
+
+    // Stop typing after 3 seconds of inactivity
+    typingTimeoutRef.current = setTimeout(() => {
+      if (isTyping) {
+        stopTyping({chatId});
+        setIsTyping(false);
+      }
+    }, 3000);
+  };
+
+  // Cleanup typing timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (typingTimeoutRef.current) {
+        clearTimeout(typingTimeoutRef.current);
+      }
+      if (isTyping && socketConnected && useSocketForSending) {
+        stopTyping({chatId});
+      }
+    };
+  }, [isTyping, socketConnected, useSocketForSending, stopTyping, chatId]);
 
   const handleMicrophonePress = () => {
     // Ses kaydı için placeholder
@@ -166,7 +242,7 @@ const MessageInput = ({chatId, onMessageSent, onLayout}: MessageInputProps) => {
               ref={textInputRef}
               style={styles.textInput}
               value={message}
-              onChangeText={setMessage}
+              onChangeText={handleTyping}
               placeholder="Mesaj yazın..."
               placeholderTextColor="#8696a0"
               multiline

@@ -37,7 +37,6 @@ const ChatHeader = ({chat}: ChatHeaderProps) => {
 
   const handleUserPress = () => {
     // Navigate to user profile or chat info
-    console.log('Navigate to chat info');
   };
 
   return (

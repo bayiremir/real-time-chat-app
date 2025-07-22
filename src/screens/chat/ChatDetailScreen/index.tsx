@@ -27,6 +27,7 @@ import {
   isMessageStarred,
 } from '../../../redux/slices/starredMessagesSlice';
 import {Message} from '../../../interfaces/api.interface';
+import {useSocket} from '../../../hooks/useSocket';
 
 type ChatDetailRouteProp = RouteProp<RootStackParamList, 'ChatDetailScreen'>;
 
@@ -45,12 +46,26 @@ const ChatDetailScreen = () => {
   // Pagination için loading state
   const [isLoadingMore, setIsLoadingMore] = useState(false);
 
+  // Real-time messages state
+  const [realtimeMessages, setRealtimeMessages] = useState<Message[]>([]);
+
   const {data: messagesData} = useGetChatMessagesQuery({
     chatId: chat._id,
     params: {page: 1, limit: 50},
   });
 
   const [markAllAsRead] = useMarkAllChatMessagesAsReadMutation();
+
+  // Socket integration
+  const {
+    connected: socketConnected,
+    joinChat,
+    leaveChat,
+    newMessage,
+    messageSent,
+    clearNewMessage,
+    clearMessageSent,
+  } = useSocket();
 
   const starredMessagesState = useSelector(
     (state: RootState) => state.starredMessages,
@@ -123,6 +138,56 @@ const ChatDetailScreen = () => {
     setContextMenuVisible(true);
   }, []);
 
+  // Join chat room when component mounts
+  useEffect(() => {
+    if (socketConnected) {
+      joinChat({chatId: chat._id});
+    }
+
+    return () => {
+      if (socketConnected) {
+        leaveChat({chatId: chat._id});
+      }
+    };
+  }, [chat._id, socketConnected, joinChat, leaveChat]);
+
+  // Handle new messages from socket
+  useEffect(() => {
+    if (newMessage && newMessage.chat._id === chat._id) {
+      setRealtimeMessages(prev => {
+        // Check if message already exists
+        const exists = prev.some(msg => msg._id === newMessage.message._id);
+        if (!exists) {
+          // Add to the beginning since FlatList is inverted
+          return [newMessage.message, ...prev];
+        }
+        return prev;
+      });
+      clearNewMessage();
+    }
+  }, [newMessage, chat._id, clearNewMessage, dispatch]);
+
+  // Handle sent message confirmation
+  useEffect(() => {
+    if (messageSent) {
+      setRealtimeMessages(prev => {
+        // Update the message if it exists, or add it if it doesn't
+        const existingIndex = prev.findIndex(
+          msg => msg._id === messageSent._id,
+        );
+        if (existingIndex >= 0) {
+          const updated = [...prev];
+          updated[existingIndex] = messageSent;
+          return updated;
+        } else {
+          return [messageSent, ...prev];
+        }
+      });
+
+      clearMessageSent();
+    }
+  }, [messageSent, clearMessageSent, dispatch, chat._id]);
+
   useEffect(() => {
     markAllAsRead(chat._id);
   }, [chat._id, markAllAsRead]);
@@ -136,8 +201,22 @@ const ChatDetailScreen = () => {
     setIsLoadingMore(false);
   };
 
+  // Combine messages from API and real-time socket messages
+  const allMessages = React.useMemo(() => {
+    const apiMessages = messagesData?.data || [];
+    // Filter out real-time messages that already exist in API data
+    const uniqueRealtimeMessages = realtimeMessages.filter(
+      rtMsg => !apiMessages.some(apiMsg => apiMsg._id === rtMsg._id),
+    );
+    // Combine and sort by timestamp (newest first for inverted FlatList)
+    return [...uniqueRealtimeMessages, ...apiMessages].sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+    );
+  }, [messagesData?.data, realtimeMessages]);
+
   const renderMessage = ({item, index}: {item: any; index: number}) => {
-    const isLastMessage = index === (messagesData?.data?.length || 0) - 1;
+    const isLastMessage = index === allMessages.length - 1;
     const isHighlighted = highlightedMessageId === item._id;
     const isDimmed = contextMenuVisible && !isHighlighted;
 
@@ -164,7 +243,7 @@ const ChatDetailScreen = () => {
           style={[styles.chatContainer, {marginBottom: inputHeight}]}>
           <FlatList
             ref={scrollViewRef}
-            data={messagesData?.data || []}
+            data={allMessages}
             renderItem={renderMessage}
             keyExtractor={item => item._id}
             style={styles.messagesList}
