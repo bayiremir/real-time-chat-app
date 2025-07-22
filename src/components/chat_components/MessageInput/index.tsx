@@ -6,6 +6,7 @@ import {
   Pressable,
   Keyboard,
   TouchableWithoutFeedback,
+  LayoutChangeEvent,
 } from 'react-native';
 import DocumentPicker from 'react-native-document-picker';
 import {launchImageLibrary} from 'react-native-image-picker';
@@ -23,9 +24,10 @@ import {
 interface MessageInputProps {
   chatId: string;
   onMessageSent?: () => void;
+  onLayout?: (e: LayoutChangeEvent) => void;
 }
 
-const MessageInput = ({chatId, onMessageSent}: MessageInputProps) => {
+const MessageInput = ({chatId, onMessageSent, onLayout}: MessageInputProps) => {
   const [message, setMessage] = useState('');
   const textInputRef = useRef<TextInput>(null);
   const [sendMessage, {isLoading: isSendingMessage}] = useSendMessageMutation();
@@ -146,7 +148,7 @@ const MessageInput = ({chatId, onMessageSent}: MessageInputProps) => {
 
   return (
     <TouchableWithoutFeedback onPress={dismissKeyboard}>
-      <View style={styles.container}>
+      <View style={styles.container} onLayout={onLayout}>
         <View style={styles.inputContainer}>
           <Pressable
             style={({pressed}) => [

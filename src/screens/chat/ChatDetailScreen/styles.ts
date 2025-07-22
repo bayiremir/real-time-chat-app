@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#e5ddd5', // WhatsApp chat background
+    backgroundColor: '#FFF7EA',
   },
   chatContainer: {
     flex: 1,

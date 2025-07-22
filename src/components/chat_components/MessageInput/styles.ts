@@ -3,9 +3,11 @@ import {Fonts} from '../../../interfaces/fonts.enum';
 
 export const styles = StyleSheet.create({
   container: {
+    position: 'absolute',
+    bottom: 30,
+    left: 0,
+    right: 0,
     paddingBottom: Platform.OS === 'ios' ? 0 : 8,
-    borderTopWidth: 0.5,
-    borderTopColor: '#e0e4e7',
     paddingHorizontal: 12,
   },
   inputContainer: {
@@ -25,8 +27,6 @@ export const styles = StyleSheet.create({
     },
     shadowOpacity: Platform.OS === 'ios' ? 0.1 : 0.15,
     shadowRadius: 4,
-    borderWidth: 1,
-    borderColor: '#e8ecf0',
   },
   attachButton: {
     marginLeft: 6,

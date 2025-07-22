@@ -125,7 +125,9 @@ const CreateListModal: React.FC = () => {
         </View>
 
         <TouchableOpacity
-          onPress={handleCreateList}
+          onPress={() => {
+            handleCreateList();
+          }}
           style={[
             styles.createButton,
             (!listName.trim() || selectedMembers.length === 0) &&
